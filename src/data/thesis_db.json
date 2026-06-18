@@ -1,0 +1,104 @@
+{
+  "criteria": [
+    {
+      "id": "crit1",
+      "number": 1,
+      "title": "Algorithmic Integrity & Human Oversight",
+      "definition": "Whether the tool maintains human-in-the-loop accountability and structural verifiability, ensuring that algorithmic transformations do not erase historical data fidelity.",
+      "empirical": "The audit reveals that while the AI agent (Gemini) can write complex code, it requires manual human intervention (e.g. prompt tuning, pip path corrections) to prevent silent loops. The 'Human Rescue' metric measures this ratio of guided synthesis.",
+      "pillarText": "HUMAN AGENCY"
+    },
+    {
+      "id": "crit2",
+      "number": 2,
+      "title": "Linguistic Sovereignty",
+      "definition": "Whether the tool preserves meaningful Arabic-language capability independent of external corporate decisions.",
+      "empirical": "Cohere Multilingual v3 was chosen precisely because it handles Arabic morphology well — but the Cohere 402 billing event revealed that linguistic sovereignty was structurally contingent on a commercial relationship. The cascade from billing failure to degraded Arabic search is the central empirical finding here.",
+      "pillarText": "LINGUISTIC SOV"
+    },
+    {
+      "id": "crit3",
+      "number": 3,
+      "title": "Market Dependency",
+      "definition": "Whether the tool's functioning is structurally dependent on corporate infrastructure in ways that can suspend civic access without warning or appeal.",
+      "empirical": "The Cohere 402 event is the sharpest illustration — the semantic search layer of a civic archive failed not due to a technical fault but because a billing threshold was crossed. Also applies to the architectural decisions (Cohere APIs, GitHub file size limits) and the dataset scaling trade-offs.",
+      "pillarText": "MARKET INDEP"
+    },
+    {
+      "id": "crit4",
+      "number": 4,
+      "title": "Information Asymmetry Mitigation",
+      "definition": "Whether the tool actually closes the gap between what the state promises (public access to legal records) and what exists in practice.",
+      "empirical": "This criterion is present from the very beginning — the activation card failure precedes the AI intervention — and reappears at the end with the clean push, where the deployed repository is architecturally incomplete because the OCR data isn't included. The civic tool promises access but cannot fully deliver it within available resource constraints.",
+      "pillarText": "CIVIC EQUITY"
+    }
+  ],
+  "lebanon_context": {
+    "title": "Linguistic Context: Arabic MSA vs Lebanese Dialect",
+    "description": "An analysis of the linguistic divide in the digitization of Lebanese administrative law.",
+    "points": [
+      {
+        "type": "MSA (Modern Standard Arabic / Fusha)",
+        "role": "The exclusive language of official state legislation, decrees, and publications in the Official Gazette.",
+        "barriers": "High formality, complex morphology, and syntactical density. It requires formal education to interpret, creating a class-based legal accessibility barrier."
+      },
+      {
+        "type": "Lebanese Arabic (Ammiya Dialect)",
+        "role": "The language of daily public life, spoken interaction, and civic expression.",
+        "barriers": "Not represented in official documents. Standard OCR tools and embeddings struggle to map Ammiya search queries (e.g. colloquial terms for 'municipal tax') to the formal MSA phrasing used in decrees."
+      },
+      {
+        "type": "Sectoral Ingestion Impact",
+        "role": "Audited in Chapter 3.",
+        "barriers": "Linguistic sovereignty means a Lebanese citizen must be able to search the Gazette using natural language (dialect or Fusha) without their query retrieval depending on a foreign corporate translation API (e.g., Cohere's commercial servers)."
+      }
+    ]
+  },
+  "manuscript": [
+    {
+      "id": "sec-intro",
+      "title": "1. Introduction: Digital Humanities & Civic Ingestion",
+      "text": "The digitization of legal archives is not a neutral technical task but a political intervention in state transparency. In Lebanon, the Official Gazette serves as the ultimate source of legal authority. Under Sassen (2000), global digital infrastructures shape local administrative landscapes, creating new nodes of authority. We construct an autonomous scraper system, auditing its creation to evaluate whether AI agency can be subordinated to democratic goals or if it merely shifts dependencies to new corporate monopolies.",
+      "citations": ["sassen2000"]
+    },
+    {
+      "id": "sec-lebanon",
+      "title": "2. The Lebanese Context: Legal Fusha vs. Colloquial Ammiya",
+      "text": "The linguistic divide in Lebanon is a central accessibility barrier. The state publishes decrees exclusively in Modern Standard Arabic (Fusha), which remains structurally inaccessible to large segments of the public due to formal syntax. Citizens communicate in the Lebanese Arabic dialect (Ammiya). Translating and searching this archive requires tools that handle Arabic morphology. Under Floridi (2014), the infosphere demands semantic alignment to bridge this gap, yet outsourcing this alignment to Cohere's Multilingual model leaves the archive's linguistic sovereignty contingent on foreign corporate billing.",
+      "citations": ["floridi2014"]
+    },
+    {
+      "id": "sec-theory",
+      "title": "3. Theoretical Framework: Actor-Network Theory in AI Systems",
+      "text": "To analyze AI development, we deploy Actor-Network Theory (ANT) as formulated by Latour (2005). We treat the developer agent (Gemini) not as a passive tool, but as an active 'actant' in a hybrid network. The code produced is a negotiation between human architectural rules and the model's autocomplete parameters. In this network, failures (audited in the Bug Graveyard) are not merely bugs, but moments of network disassembly where the politics of artifacts, in the sense of Winner (1980), become visible.",
+      "citations": ["latour2005", "winner1980"]
+    },
+    {
+      "id": "sec-criteria",
+      "title": "4. Methodology: The Four Auditing Criteria",
+      "text": "We audit the scraper system using four distinct criteria. First, Algorithmic Integrity evaluate the human-in-the-loop guidance ratio. Second, Linguistic Sovereignty checks independent Arabic capabilities. Third, Market Dependency measures reliance on corporate APIs. Finally, Information Asymmetry Mitigation, drawing on Kitchin (2014), evaluates whether the tool actually bridges the public access gap or if data limits restrict its democratic value.",
+      "citations": ["kitchin2014"]
+    },
+    {
+      "id": "sec-findings",
+      "title": "5. Empirical Findings: The Cohere 402 Billing Crash",
+      "text": "The central empirical finding is the Cohere 402 billing crash. When the Cohere API threshold was crossed, the semantic vector search failed silently. As audited in Ananny & Crawford (2018), transparency ideals often fail to address these hidden market infrastructures. The archive was technically functional, but its semantic translation layer was deactivated, revealing that civic access is structurally contingent on global capital flows.",
+      "citations": ["ananny2018"]
+    },
+    {
+      "id": "sec-limits",
+      "title": "6. Conclusion: Limitations & Open Incompleteness",
+      "text": "In conclusion, the Gazetted Auditing Laboratory demonstrates that AI agency can assist in digital humanities, but cannot operate autonomously without introducing hidden dependencies. Under Salganik (2017), digital research must remain accountable to the human context. The incomplete OCR push on GitHub proves that civic tools remain constrained by market limits, demanding a shift towards fully self-hosted, sovereign open-source models.",
+      "citations": ["salganik2017"]
+    }
+  ],
+  "bibliography": [
+    {"key": "ananny2018", "citation": "Ananny, M., & Crawford, K. (2018). 'Seeing without knowing: Limitations of the transparency ideal.' New Media & Society, 20(3), 973-989.", "anchor": "sec-findings"},
+    {"key": "floridi2014", "citation": "Floridi, L. (2014). 'The Fourth Revolution: How the Infosphere is Reshaping Human Reality.' Oxford University Press.", "anchor": "sec-lebanon"},
+    {"key": "kitchin2014", "citation": "Kitchin, R. (2014). 'The Data Revolution: Big Data, Open Data and Their Consequences.' SAGE Publications.", "anchor": "sec-criteria"},
+    {"key": "latour2005", "citation": "Latour, B. (2005). 'Reassembling the Social: An Introduction to Actor-Network-Theory.' Oxford University Press.", "anchor": "sec-theory"},
+    {"key": "salganik2017", "citation": "Salganik, M. J. (2017). 'Bit by Bit: Social Research in the Digital Age.' Princeton University Press.", "anchor": "sec-limits"},
+    {"key": "sassen2000", "citation": "Sassen, S. (2000). 'Spatialities and Temporalities of the Global: An Introduction.' Public Culture, 12(1), 215-232.", "anchor": "sec-intro"},
+    {"key": "winner1980", "citation": "Winner, L. (1980). 'Do Artifacts Have Politics?' Daedalus, 109(1), 121-136.", "anchor": "sec-theory"}
+  ]
+}
