@@ -561,6 +561,28 @@ function App() {
     }
   }, [cascades, totalScraperSteps, totalGeminiChatSteps]);
 
+  // Synchronize app state back to the URL query parameters dynamically
+  useEffect(() => {
+    if (screenState !== 'app') return;
+
+    const params = new URLSearchParams();
+    params.set('tab', activeTab);
+    
+    if (activeTab === 'timeline' && activeCascade) {
+      params.set('file', getOriginalFileName(activeCascade.name));
+      params.set('step', String(playbackIndex + 1));
+    } else if (activeTab === 'scraper') {
+      params.set('step', String(scraperVersion));
+    } else if (activeTab === 'gemini_chat') {
+      params.set('step', String(geminiChatVersion));
+    } else if (activeTab === 'whatsapp_chats') {
+      params.set('chat', activeWhatsappChat);
+    }
+    
+    const newRelativePathQuery = window.location.pathname + '?' + params.toString();
+    window.history.replaceState(null, '', newRelativePathQuery);
+  }, [screenState, activeTab, selectedCascadeId, playbackIndex, scraperVersion, geminiChatVersion, activeWhatsappChat]);
+
   // Reset indices on cascade switch
   useEffect(() => {
     setPlaybackIndex(0);
