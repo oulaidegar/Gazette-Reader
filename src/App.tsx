@@ -504,6 +504,63 @@ function App() {
   const [showAboutDialog, setShowAboutDialog] = useState<boolean>(false);
   const [showManifestoDialog, setShowManifestoDialog] = useState<boolean>(false);
 
+  // Handle URL deep linking for thesis supervisor
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    const cascadeId = params.get('cascade') || params.get('file');
+    const step = params.get('step');
+    const chat = params.get('chat');
+
+    if (tab || cascadeId || chat) {
+      // Direct deep link detected! Skip boot sequence.
+      setScreenState('app');
+      
+      if (tab) {
+        setActiveTab(tab as any);
+      }
+      
+      if (cascadeId) {
+        const found = cascades.find(c => 
+          c.id === cascadeId || 
+          getOriginalFileName(c.name) === cascadeId || 
+          getOriginalFileName(c.name) === `${cascadeId}.md` ||
+          c.name === cascadeId
+        );
+        if (found) {
+          setSelectedCascadeId(found.id);
+          
+          if (step) {
+            const stepIdx = parseInt(step) - 1; // 1-indexed from user link, 0-indexed in code
+            if (!isNaN(stepIdx) && stepIdx >= 0 && stepIdx < found.steps.length) {
+              // Defer step indexing slightly to allow reset useEffect to run first
+              setTimeout(() => {
+                setPlaybackIndex(stepIdx);
+              }, 100);
+            }
+          }
+        }
+      }
+      
+      if (tab === 'scraper' && step) {
+        const val = parseInt(step);
+        if (!isNaN(val) && val >= 1 && val <= totalScraperSteps) {
+          setScraperVersion(val);
+        }
+      }
+      if (tab === 'gemini_chat' && step) {
+        const val = parseInt(step);
+        if (!isNaN(val) && val >= 1 && val <= totalGeminiChatSteps) {
+          setGeminiChatVersion(val);
+        }
+      }
+      
+      if (chat && (chat === 'uncle' || chat === 'gazette')) {
+        setActiveWhatsappChat(chat);
+      }
+    }
+  }, [cascades, totalScraperSteps, totalGeminiChatSteps]);
+
   // Reset indices on cascade switch
   useEffect(() => {
     setPlaybackIndex(0);
