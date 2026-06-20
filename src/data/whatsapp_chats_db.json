@@ -676,15 +676,6 @@
       "content": "<attached: 00000015-AUDIO-2026-01-20-11-22-00.opus>",
       "type": "audio",
       "mediaPath": "/whatsapp/WhatsApp Chat - gazette/00000015-AUDIO-2026-01-20-11-22-00.opus"
-    },
-    {
-      "timestamp": "20/01/2026, 11:22:01",
-      "date": "20/01/2026",
-      "time": "11:22:01",
-      "sender": "gazette",
-      "content": "<attached: 00000016-AUDIO-2026-01-20-11-22-01.opus>",
-      "type": "audio",
-      "mediaPath": "/whatsapp/WhatsApp Chat - gazette/00000016-AUDIO-2026-01-20-11-22-01.opus"
     }
   ]
 }

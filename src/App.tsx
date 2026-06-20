@@ -1268,6 +1268,26 @@ function App() {
                     The algorithmic audit is built on four core criteria evaluating AI agency, market dependency, and civic equity. Click on any pillar to inspect its definition and empirical findings.
                   </p>
 
+                  <div className="outset-panel" style={{ 
+                    padding: '12px', 
+                    background: '#ffffd0', 
+                    border: '1px dashed #555', 
+                    fontFamily: '"Courier New", Courier, monospace', 
+                    fontSize: '12.5px', 
+                    lineHeight: '1.5',
+                    color: '#000',
+                    marginBottom: '16px' 
+                  }}>
+                    <span style={{ fontWeight: 'bold', display: 'block', marginBottom: '6px', color: 'var(--win-blue)', textTransform: 'uppercase' }}>
+                      📋 Methodological Frame: The Oscillating Method
+                    </span>
+                    <strong>Broadly</strong>, the oscillating method is an <strong>autoethnographic, practice-based approach</strong> grounded in Donald Schön’s epistemology of the "reflective practitioner," designed to capture the lived, material experience of building civic infrastructure with AI from the inside.
+                    <br /><br />
+                    <strong>Narrowly</strong>, it functions as a diagnostic tool that leverages your dual identity by requiring you to <strong>constantly shift back and forth between two distinct personas: the applied "vibe-coder"</strong> who executes technical tasks to keep the build moving, <strong>and the "critical researcher"</strong> who pauses to document friction and interrogate what those technical failures reveal about algorithmic biases, structural dependencies, and corporate monopolies.
+                    <br /><br />
+                    By deliberately treating this split identity as an analytical instrument rather than a conflict of interest, the method captures the exact moments when your technical ambitions hit structural or material ceilings, effectively turning your subjective coding frustrations into rigorous, objective data.
+                  </div>
+
                   {/* Greek Pillar Chamber */}
                   <div className="pillar-chamber">
                     {thesisDb.criteria.map((crit, idx) => (
