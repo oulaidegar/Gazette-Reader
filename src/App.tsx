@@ -203,7 +203,8 @@ function App() {
     { id: 'manuscript', title: 'Chapter 3: Interactive Manuscript & Bibliography Navigator', icon: '📖', summary: 'Full Research Text with Dual-Pane Scroll Citation Syncer' },
     { id: 'gource', title: 'Special Exhibit 2: Gource Repository Evolution Visualizer', icon: '☄️', summary: 'Live HTML5 Canvas simulation of repository commits & git instructions' },
     { id: 'materials', title: 'Chapter 4: Theoretical Framework Materials & Downloads', icon: '💾', summary: 'Academic preprints, data manifests, and core log files' },
-    { id: 'vibecoder', title: 'Special Exhibit 3: The Way of Code - The Vibe Coder', icon: '📁', summary: 'The Timeless Art of Vibe Coding (Adapted from Lao Tzu by Rick Rubin)' }
+    { id: 'vibecoder', title: 'Special Exhibit 3: The Way of Code - The Vibe Coder', icon: '📁', summary: 'The Timeless Art of Vibe Coding (Adapted from Lao Tzu by Rick Rubin)' },
+    { id: 'invoices', title: 'Special Exhibit 4: Accumulative Audit Invoices & Financial Costs', icon: '📁', summary: 'Financial receipts and costs accumulated during the thesis auditing project' }
   ];
 
 
@@ -460,6 +461,53 @@ function App() {
                     </div>
                   )}
 
+                  {chapter.id === 'invoices' && (
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
+                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}├── 🖼️ </span>
+                        <span style={{ marginLeft: '6px', color: '#222' }}>Activation Card Receipt.jpeg (156 KB)</span>
+                        <button className="netscape-download-btn" style={{ marginLeft: '10px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog('Activation Card Receipt.jpeg', '156 KB')}>
+                          [Download]
+                        </button>
+                      </div>
+                      <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
+                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}├── 📕 </span>
+                        <span style={{ marginLeft: '6px', color: '#222' }}>Cohere Invoice.pdf (36 KB)</span>
+                        <button className="netscape-download-btn" style={{ marginLeft: '10px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog('Cohere Invoice.pdf', '36 KB')}>
+                          [Download]
+                        </button>
+                      </div>
+                      <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
+                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}├── 🖼️ </span>
+                        <span style={{ marginLeft: '6px', color: '#222' }}>Cohere Usage.png (183 KB)</span>
+                        <button className="netscape-download-btn" style={{ marginLeft: '10px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog('Cohere Usage.png', '183 KB')}>
+                          [Download]
+                        </button>
+                      </div>
+                      <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
+                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}├── 📕 </span>
+                        <span style={{ marginLeft: '6px', color: '#222' }}>Google Cloud Console.pdf (37 KB)</span>
+                        <button className="netscape-download-btn" style={{ marginLeft: '10px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog('Google Cloud Console.pdf', '37 KB')}>
+                          [Download]
+                        </button>
+                      </div>
+                      <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
+                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}├── 📕 </span>
+                        <span style={{ marginLeft: '6px', color: '#222' }}>Supabase Receipt 1.pdf (115 KB)</span>
+                        <button className="netscape-download-btn" style={{ marginLeft: '10px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog('Supabase Receipt 1.pdf', '115 KB')}>
+                          [Download]
+                        </button>
+                      </div>
+                      <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
+                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}└── 📕 </span>
+                        <span style={{ marginLeft: '6px', color: '#222' }}>Supabase Recipet 2 .pdf (109 KB)</span>
+                        <button className="netscape-download-btn" style={{ marginLeft: '10px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog('Supabase Recipet 2 .pdf', '109 KB')}>
+                          [Download]
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
                 </div>
               )}
             </div>
@@ -511,77 +559,100 @@ function App() {
     const cascadeId = params.get('cascade') || params.get('file');
     const step = params.get('step');
     const chat = params.get('chat');
+    const gopher = params.get('gopher');
 
-    if (tab || cascadeId || chat) {
+    if (tab || cascadeId || chat || gopher) {
       // Direct deep link detected! Skip boot sequence.
-      setScreenState('app');
-      
-      if (tab) {
-        setActiveTab(tab as any);
-      }
-      
-      if (cascadeId) {
-        const found = cascades.find(c => 
-          c.id === cascadeId || 
-          getOriginalFileName(c.name) === cascadeId || 
-          getOriginalFileName(c.name) === `${cascadeId}.md` ||
-          c.name === cascadeId
-        );
-        if (found) {
-          setSelectedCascadeId(found.id);
-          
-          if (step) {
-            const stepIdx = parseInt(step) - 1; // 1-indexed from user link, 0-indexed in code
-            if (!isNaN(stepIdx) && stepIdx >= 0 && stepIdx < found.steps.length) {
-              // Defer step indexing slightly to allow reset useEffect to run first
-              setTimeout(() => {
-                setPlaybackIndex(stepIdx);
-              }, 100);
+      if (gopher) {
+        setScreenState('gopher');
+        setGopherPath(gopher);
+        setPathHistory([gopher]);
+        
+        // Auto-expand directory depending on path
+        if (gopher.startsWith('gopher://gazette.audit.lab/thesis')) {
+          const parts = gopher.split('/');
+          const subId = parts[parts.length - 1]; // e.g. 'invoices', 'context', etc.
+          setExpandedDirs(prev => ({
+            ...prev,
+            'root_thesis': true,
+            [`thesis_${subId}`]: true
+          }));
+        }
+      } else {
+        setScreenState('app');
+        
+        if (tab) {
+          setActiveTab(tab as any);
+        }
+        
+        if (cascadeId) {
+          const found = cascades.find(c => 
+            c.id === cascadeId || 
+            getOriginalFileName(c.name) === cascadeId || 
+            getOriginalFileName(c.name) === `${cascadeId}.md` ||
+            c.name === cascadeId
+          );
+          if (found) {
+            setSelectedCascadeId(found.id);
+            
+            if (step) {
+              const stepIdx = parseInt(step) - 1; // 1-indexed from user link, 0-indexed in code
+              if (!isNaN(stepIdx) && stepIdx >= 0 && stepIdx < found.steps.length) {
+                // Defer step indexing slightly to allow reset useEffect to run first
+                setTimeout(() => {
+                  setPlaybackIndex(stepIdx);
+                }, 100);
+              }
             }
           }
         }
-      }
-      
-      if (tab === 'scraper' && step) {
-        const val = parseInt(step);
-        if (!isNaN(val) && val >= 1 && val <= totalScraperSteps) {
-          setScraperVersion(val);
+        
+        if (tab === 'scraper' && step) {
+          const val = parseInt(step);
+          if (!isNaN(val) && val >= 1 && val <= totalScraperSteps) {
+            setScraperVersion(val);
+          }
         }
-      }
-      if (tab === 'gemini_chat' && step) {
-        const val = parseInt(step);
-        if (!isNaN(val) && val >= 1 && val <= totalGeminiChatSteps) {
-          setGeminiChatVersion(val);
+        if (tab === 'gemini_chat' && step) {
+          const val = parseInt(step);
+          if (!isNaN(val) && val >= 1 && val <= totalGeminiChatSteps) {
+            setGeminiChatVersion(val);
+          }
         }
-      }
-      
-      if (chat && (chat === 'uncle' || chat === 'gazette')) {
-        setActiveWhatsappChat(chat);
+        
+        if (chat && (chat === 'uncle' || chat === 'gazette')) {
+          setActiveWhatsappChat(chat);
+        }
       }
     }
   }, [cascades, totalScraperSteps, totalGeminiChatSteps]);
 
   // Synchronize app state back to the URL query parameters dynamically
   useEffect(() => {
-    if (screenState !== 'app') return;
+    if (screenState !== 'app' && screenState !== 'gopher') return;
 
     const params = new URLSearchParams();
-    params.set('tab', activeTab);
     
-    if (activeTab === 'timeline' && activeCascade) {
-      params.set('file', getOriginalFileName(activeCascade.name));
-      params.set('step', String(playbackIndex + 1));
-    } else if (activeTab === 'scraper') {
-      params.set('step', String(scraperVersion));
-    } else if (activeTab === 'gemini_chat') {
-      params.set('step', String(geminiChatVersion));
-    } else if (activeTab === 'whatsapp_chats') {
-      params.set('chat', activeWhatsappChat);
+    if (screenState === 'app') {
+      params.set('tab', activeTab);
+      
+      if (activeTab === 'timeline' && activeCascade) {
+        params.set('file', getOriginalFileName(activeCascade.name));
+        params.set('step', String(playbackIndex + 1));
+      } else if (activeTab === 'scraper') {
+        params.set('step', String(scraperVersion));
+      } else if (activeTab === 'gemini_chat') {
+        params.set('step', String(geminiChatVersion));
+      } else if (activeTab === 'whatsapp_chats') {
+        params.set('chat', activeWhatsappChat);
+      }
+    } else if (screenState === 'gopher') {
+      params.set('gopher', gopherPath);
     }
     
     const newRelativePathQuery = window.location.pathname + '?' + params.toString();
     window.history.replaceState(null, '', newRelativePathQuery);
-  }, [screenState, activeTab, selectedCascadeId, playbackIndex, scraperVersion, geminiChatVersion, activeWhatsappChat]);
+  }, [screenState, activeTab, selectedCascadeId, playbackIndex, scraperVersion, geminiChatVersion, activeWhatsappChat, gopherPath]);
 
   // Reset indices on cascade switch
   useEffect(() => {
@@ -1515,6 +1586,94 @@ function App() {
                 </div>
               )}
 
+              {/* Special Exhibit 4: Accumulative Audit Invoices & Financial Costs Subpage */}
+              {gopherPath === 'gopher://gazette.audit.lab/thesis/invoices' && (
+                <div className="gopher-document-view">
+                  <div className="gopher-item-row" style={{ marginBottom: '16px' }}>
+                    <span className="gopher-icon">📁</span>
+                    <button 
+                      className="gopher-link parent-dir"
+                      onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/thesis')}
+                    >
+                      .. (Up to higher level directory)
+                    </button>
+                  </div>
+
+                  <h2 className="gopher-doc-title">Accumulative Audit Invoices & Financial Costs</h2>
+                  <p style={{ fontStyle: 'italic', marginBottom: '16px', fontSize: '13px', color: '#444' }}>
+                    This section catalogues the financial invoices and usage receipts accumulated during the processing, hosting, and API-based language model auditing phases of the Lebanese Official Gazette.
+                  </p>
+
+                  <div className="gopher-materials-section" style={{ background: '#dcdcdc', border: '1px solid #999', padding: '12px' }}>
+                    <h3 style={{ fontSize: '14px', fontWeight: 'bold', borderBottom: '1px solid #333', paddingBottom: '4px', marginBottom: '10px' }}>
+                      📂 Invoices & Receipts Index
+                    </h3>
+                    <div className="gopher-materials-list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <div className="gopher-material-item">
+                        <span style={{ fontSize: '20px' }}>🖼️</span>
+                        <div className="material-info">
+                          <span className="material-name">Activation Card Receipt.jpeg</span>
+                          <span className="material-size">(156 KB)</span>
+                        </div>
+                        <button className="netscape-download-btn" onClick={() => triggerDownloadDialog('Activation Card Receipt.jpeg', '156 KB')}>
+                          Download File
+                        </button>
+                      </div>
+                      <div className="gopher-material-item">
+                        <span style={{ fontSize: '20px' }}>📕</span>
+                        <div className="material-info">
+                          <span className="material-name">Cohere Invoice.pdf</span>
+                          <span className="material-size">(36 KB)</span>
+                        </div>
+                        <button className="netscape-download-btn" onClick={() => triggerDownloadDialog('Cohere Invoice.pdf', '36 KB')}>
+                          Download File
+                        </button>
+                      </div>
+                      <div className="gopher-material-item">
+                        <span style={{ fontSize: '20px' }}>🖼️</span>
+                        <div className="material-info">
+                          <span className="material-name">Cohere Usage.png</span>
+                          <span className="material-size">(183 KB)</span>
+                        </div>
+                        <button className="netscape-download-btn" onClick={() => triggerDownloadDialog('Cohere Usage.png', '183 KB')}>
+                          Download File
+                        </button>
+                      </div>
+                      <div className="gopher-material-item">
+                        <span style={{ fontSize: '20px' }}>📕</span>
+                        <div className="material-info">
+                          <span className="material-name">Google Cloud Console.pdf</span>
+                          <span className="material-size">(37 KB)</span>
+                        </div>
+                        <button className="netscape-download-btn" onClick={() => triggerDownloadDialog('Google Cloud Console.pdf', '37 KB')}>
+                          Download File
+                        </button>
+                      </div>
+                      <div className="gopher-material-item">
+                        <span style={{ fontSize: '20px' }}>📕</span>
+                        <div className="material-info">
+                          <span className="material-name">Supabase Receipt 1.pdf</span>
+                          <span className="material-size">(115 KB)</span>
+                        </div>
+                        <button className="netscape-download-btn" onClick={() => triggerDownloadDialog('Supabase Receipt 1.pdf', '115 KB')}>
+                          Download File
+                        </button>
+                      </div>
+                      <div className="gopher-material-item">
+                        <span style={{ fontSize: '20px' }}>📕</span>
+                        <div className="material-info">
+                          <span className="material-name">Supabase Recipet 2 .pdf</span>
+                          <span className="material-size">(109 KB)</span>
+                        </div>
+                        <button className="netscape-download-btn" onClick={() => triggerDownloadDialog('Supabase Recipet 2 .pdf', '109 KB')}>
+                          Download File
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
 
 
             </div>
@@ -1575,7 +1734,21 @@ function App() {
                   {downloadFileState.progress === 100 && (
                     <button 
                       className="win-button" 
-                      onClick={() => alert(`Simulated open: Displaying raw content of ${downloadFileState.name}`)}
+                      onClick={() => {
+                        const invoiceFiles = [
+                          'Activation Card Receipt.jpeg',
+                          'Cohere Invoice.pdf',
+                          'Cohere Usage.png',
+                          'Google Cloud Console.pdf',
+                          'Supabase Receipt 1.pdf',
+                          'Supabase Recipet 2 .pdf'
+                        ];
+                        if (invoiceFiles.includes(downloadFileState.name)) {
+                          window.open(`./invoices/${downloadFileState.name}`, '_blank');
+                        } else {
+                          alert(`Simulated open: Displaying raw content of ${downloadFileState.name}`);
+                        }
+                      }}
                       style={{ width: '80px' }}
                     >
                       Open
