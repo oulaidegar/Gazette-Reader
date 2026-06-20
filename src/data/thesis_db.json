@@ -3,8 +3,8 @@
     {
       "id": "crit1",
       "number": 1,
-      "title": "Algorithmic Integrity & Human Oversight",
-      "definition": "Whether the tool maintains human-in-the-loop accountability and structural verifiability, ensuring that algorithmic transformations do not erase historical data fidelity.",
+      "title": "Accountability and Oversight",
+      "definition": "Prompt logs, terminal timeouts, and hallucination correction cycles show how easily the model can be steered, or how much it resists. Does the developer keep meaningful control, or does the agentic system turn into an opaque black box that nobody can really answer for? This represents the epistemic link, and this criterion is where it gets tested.",
       "empirical": "The audit reveals that while the AI agent (Gemini) can write complex code, it requires manual human intervention (e.g. prompt tuning, pip path corrections) to prevent silent loops. The 'Human Rescue' metric measures this ratio of guided synthesis.",
       "pillarText": "HUMAN AGENCY"
     },
@@ -12,15 +12,15 @@
       "id": "crit2",
       "number": 2,
       "title": "Linguistic Sovereignty",
-      "definition": "Whether the tool preserves meaningful Arabic-language capability independent of external corporate decisions.",
+      "definition": "Coding journals and search mismatch logs are checked for errors, contextual failures, and semantic degradation when the system processes literary Arabic (Fusha) legal texts. The pattern of failures here is a concrete measure of how far Western-centric frontier models reproduce linguistic imperialism and algorithmic colonialism.",
       "empirical": "Cohere Multilingual v3 was chosen precisely because it handles Arabic morphology well — but the Cohere 402 billing event revealed that linguistic sovereignty was structurally contingent on a commercial relationship. The cascade from billing failure to degraded Arabic search is the central empirical finding here.",
       "pillarText": "LINGUISTIC SOV"
     },
     {
       "id": "crit3",
       "number": 3,
-      "title": "Market Dependency",
-      "definition": "Whether the tool's functioning is structurally dependent on corporate infrastructure in ways that can suspend civic access without warning or appeal.",
+      "title": "Market Dependency vs Public Value",
+      "definition": "Development logs and billing receipts map the ties between a civil society initiative and the capital-intensive corporate monopolies it depends on. Building a public civic tool on commercial API’s that can fail or change their pricing overnight is the paradox at the heart of this criterion, and it acts as the technological → civic link in the chain.",
       "empirical": "The Cohere 402 event is the sharpest illustration — the semantic search layer of a civic archive failed not due to a technical fault but because a billing threshold was crossed. Also applies to the architectural decisions (Cohere APIs, GitHub file size limits) and the dataset scaling trade-offs.",
       "pillarText": "MARKET INDEP"
     },
@@ -28,7 +28,7 @@
       "id": "crit4",
       "number": 4,
       "title": "Information Asymmetry Mitigation",
-      "definition": "Whether the tool actually closes the gap between what the state promises (public access to legal records) and what exists in practice.",
+      "definition": "Antigravity changelogs and deployment logs track the intellectual, infrastructural, and computational labor it actually takes to turn an unsearchable data format into something usable, asking the question of whether the ‘democratization of software building’ really lets a citizen dismantle state-enforced data hoarding, or does it just look that way from the outside?",
       "empirical": "This criterion is present from the very beginning — the activation card failure precedes the AI intervention — and reappears at the end with the clean push, where the deployed repository is architecturally incomplete because the OCR data isn't included. The civic tool promises access but cannot fully deliver it within available resource constraints.",
       "pillarText": "CIVIC EQUITY"
     }
@@ -76,7 +76,7 @@
     {
       "id": "sec-criteria",
       "title": "4. Methodology: The Four Auditing Criteria",
-      "text": "We audit the scraper system using four distinct criteria. First, Algorithmic Integrity evaluate the human-in-the-loop guidance ratio. Second, Linguistic Sovereignty checks independent Arabic capabilities. Third, Market Dependency measures reliance on corporate APIs. Finally, Information Asymmetry Mitigation, drawing on Kitchin (2014), evaluates whether the tool actually bridges the public access gap or if data limits restrict its democratic value.",
+      "text": "We audit the scraper system using four distinct criteria. First, Accountability and Oversight evaluates human-in-the-loop steering and control. Second, Linguistic Sovereignty checks errors and semantic degradation when processing literary Arabic (Fusha) legal texts. Third, Market Dependency vs Public Value maps reliance on capital-intensive corporate monopolies. Finally, Information Asymmetry Mitigation, drawing on Kitchin (2014), tracks the intellectual, infrastructural, and computational labor it actually takes to turn an unsearchable data format into something usable.",
       "citations": ["kitchin2014"]
     },
     {

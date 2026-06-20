@@ -199,7 +199,7 @@ function App() {
   const thesisChapters = [
     { id: 'context', title: 'Chapter 1: Geopolitical, Socio-Economic & Digital Infrastructure Overview', icon: '📁', summary: 'Geopolitical framework, demographic profiles, and network infrastructure of Lebanon' },
     { id: 'translation', title: 'Special Exhibit 1: Arabic Linguistic Shifts & Diglossia Translation Case Study', icon: '🗣️', summary: 'Colloquial Lebanese, MSA, and Classical Arabic Styles' },
-    { id: 'criteria', title: 'Chapter 2: Visual Methodology - The 4 Auditing Pillars', icon: '🏛️', summary: 'Algorithmic Agency, Linguistic Sovereignty, Market Dependency, and Asymmetry' },
+    { id: 'criteria', title: 'Chapter 2: Visual Methodology - The 4 Auditing Pillars', icon: '🏛️', summary: 'Accountability and Oversight, Linguistic Sovereignty, Market Dependency vs Public Value, and Information Asymmetry Mitigation' },
     { id: 'manuscript', title: 'Chapter 3: Interactive Manuscript & Bibliography Navigator', icon: '📖', summary: 'Full Research Text with Dual-Pane Scroll Citation Syncer' },
     { id: 'gource', title: 'Special Exhibit 2: Gource Repository Evolution Visualizer', icon: '☄️', summary: 'Live HTML5 Canvas simulation of repository commits & git instructions' },
     { id: 'materials', title: 'Chapter 4: Theoretical Framework Materials & Downloads', icon: '💾', summary: 'Academic preprints, data manifests, and core log files' },
