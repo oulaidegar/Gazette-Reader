@@ -577,6 +577,11 @@ function App() {
             'root_thesis': true,
             [`thesis_${subId}`]: true
           }));
+        } else if (gopher === 'gopher://gazette.audit.lab/readme') {
+          setExpandedDirs(prev => ({
+            ...prev,
+            'root_readme': true
+          }));
         }
       } else {
         setScreenState('app');
@@ -963,6 +968,41 @@ function App() {
               {/* Root Gopher Directory */}
               {gopherPath === 'gopher://gazette.audit.lab/' && (
                 <div className="gopher-list" style={{ fontFamily: 'monospace', fontSize: '14px' }}>
+                  {/* Item 0: README Folder */}
+                  <div className="gopher-item-container" style={{ margin: '4px 0 12px 0' }}>
+                    <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center' }}>
+                      <span 
+                        className="gopher-collapse-toggle" 
+                        onClick={(e) => toggleDir('root_readme', e)}
+                        style={{ cursor: 'pointer', fontWeight: 'bold', color: 'blue', marginRight: '6px', userSelect: 'none' }}
+                      >
+                        {expandedDirs['root_readme'] ? '[-]' : '[+]'}
+                      </span>
+                      <span className="gopher-icon" style={{ marginRight: '6px' }}>📁</span>
+                      <button 
+                        className="gopher-link"
+                        onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/readme')}
+                        style={{ fontWeight: 'bold', color: '#b22222' }}
+                      >
+                        You need to absolutely Readme before going into the website/
+                      </button>
+                    </div>
+                    {expandedDirs['root_readme'] && (
+                      <div className="gopher-subtree" style={{ paddingLeft: '4px' }}>
+                        <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0' }}>
+                          <span style={{ color: '#666' }}>├── 📄 </span>
+                          <button className="gopher-link" onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/readme')} style={{ fontSize: '13px', marginLeft: '6px' }}>
+                            [TXT] View README Document
+                          </button>
+                        </div>
+                        <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'flex-start', margin: '2px 0', fontSize: '12px', color: '#555' }}>
+                          <span style={{ color: '#666' }}>└── 📝 </span>
+                          <span style={{ marginLeft: '6px' }}>[TXT] Context: An explanation of UI/UX choices, late 90s aesthetic, and thesis appendices.</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
                   {/* Item 1: App */}
                   <div className="gopher-item-container" style={{ margin: '4px 0' }}>
                     <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center' }}>
@@ -1581,6 +1621,57 @@ function App() {
                         </span>
                         This February 2025 tweet by Andrej Karpathy (former Director of AI at Tesla and OpenAI co-founder) formally coined the term <strong>"Vibe Coding"</strong>, describing the paradigm shift from mechanical syntax drafting to prompt-driven high-level direction.
                       </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* README: You need to absolutely Readme before going into the website */}
+              {gopherPath === 'gopher://gazette.audit.lab/readme' && (
+                <div className="gopher-document-view" style={{ maxWidth: '900px' }}>
+                  <div className="gopher-item-row" style={{ marginBottom: '16px' }}>
+                    <span className="gopher-icon">📁</span>
+                    <button 
+                      className="gopher-link parent-dir"
+                      onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/')}
+                    >
+                      .. (Up to higher level directory)
+                    </button>
+                  </div>
+
+                  <h2 className="gopher-doc-title">SYSTEM README & AUDITING STATEMENT</h2>
+                  
+                  <div className="gopher-text-content" style={{ 
+                    padding: '24px', 
+                    background: '#f8f9fa', 
+                    border: '2px solid #555', 
+                    boxShadow: 'inset 2px 2px 0 #fff, 3px 3px 0 rgba(0,0,0,0.15)',
+                    lineHeight: '1.6', 
+                    fontFamily: '"Courier New", Courier, monospace', 
+                    fontSize: '14px', 
+                    color: '#000' 
+                  }}>
+                    <div style={{ borderBottom: '2px dashed #777', paddingBottom: '12px', marginBottom: '20px', textAlign: 'center', fontWeight: 'bold' }}>
+                      === ATTENTION OPERATOR: SYSTEM OVERVIEW ===
+                    </div>
+
+                    <p style={{ marginBottom: '16px' }}>
+                      <strong>1. EMULATION OF FRUSTRATION (UI/UX DESIGN PHILOSOPHY)</strong><br />
+                      The user interface (UI) and user experience (UX) of this web application deliberately emulate the intense frustration and systemic clunkiness experienced when attempting to navigate the official website of the <em>Official Lebanese Gazette</em>. It is designed to feel simultaneously antiquated, clunky, yet functionally intuitive to those willing to audit it.
+                    </p>
+
+                    <p style={{ marginBottom: '16px' }}>
+                      <strong>2. PORTAL HISTORIOGRAPHY (THE LATE 90S / EARLY 2000S AESTHETIC)</strong><br />
+                      The visual aesthetic, monospaced layout, netscape dialog boxes, and BIOS load sequences are reminiscent of the late 1990s and early 2000s web portals. This design choice is a direct critique and nod to the stagnant, unchanged nature of the Lebanese government's digital archive portals—maintaining a static time capsule of public administration tools that refuse to evolve.
+                    </p>
+
+                    <p style={{ marginBottom: '16px' }}>
+                      <strong>3. THESIS CONTEXT & APPENDICES</strong><br />
+                      This web application serves as the interactive <strong>appendices</strong> of my academic thesis auditing project. It compiles developer logs, translation case studies, git commits, WhatsApp dialogue history, and financial receipts to provide a complete, transparent, and multi-dimensional audit of the Official Gazette parsing and indexing architecture.
+                    </p>
+
+                    <div style={{ borderTop: '2px dashed #777', paddingTop: '12px', marginTop: '20px', textAlign: 'center', fontSize: '11px', color: '#555' }}>
+                      Gazette Audit Terminal v1.0.0 · All Rights Reserved
                     </div>
                   </div>
                 </div>
