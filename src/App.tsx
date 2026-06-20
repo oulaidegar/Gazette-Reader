@@ -1735,6 +1735,125 @@ function App() {
                       </div>
                     </div>
                   )}
+
+                  {activePillarIndex === 2 && (
+                    <div className="outset-panel" style={{ marginTop: '12px', padding: '12px', background: '#f6f6f6', border: '2px solid var(--win-dark-gray)' }}>
+                      <h4 style={{ color: 'var(--win-blue)', fontWeight: 'bold', fontSize: '12px', borderBottom: '1px solid #999', paddingBottom: '4px', marginBottom: '8px', textTransform: 'uppercase', fontFamily: '"Courier New", monospace' }}>
+                        🔌 Empirical Instantiations & Friction Logs (Pillar 3 Auditing Map)
+                      </h4>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>1. Predatory Complexity and the Extraction of Free Labor (The Google Drive API Entanglement)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> February 2, 2026, at 12:42:45
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToChatStep(12)}
+                            >
+                              Gemini Chat Logs.pdf (Step 12)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            The AI suggested a complex Google Drive API setup (OAuth, `credentials.json`) rather than simple free scripting. This represents "predatory complexity," where free API credits act as acquisition costs to extract developer labor and structure regional datasets for Western LLM refinement.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>2. The Cohere Decision (Structural Outsourcing)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> February 6, 2026, at 11:20:57
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToChatStep(30)}
+                            >
+                              Gemini Chat Logs.pdf (Step 30)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            Achieving Arabic legal search capabilities required embedding tools with complex root morphology. The project had to outsource its core NLP process to Cohere's commercial infrastructure, structurally merging Arabic linguistic sovereignty with corporate dependency.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>3. The Supabase $25 Payment (Dependency by Accumulation)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> Mid-build (Theoretical sections 5.4 / 6.3)
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Invoices Exhibit:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/thesis/invoices')}
+                            >
+                              Special Exhibit 4: Accumulative Audit Invoices &amp; Financial Costs
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            Processing the 15GB archive generated tens of thousands of database rows, passively exceeding free limits and demanding a paid $25 Supabase subscription. This illustrates "dependency by accumulation," proving public data scale drives linear commercial costs.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>4. The Metered Developer (IDE Rate Limits)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> Spanning the build (Section 5.5)
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            Development was routinely paused for hours when agentic programming prompts hit provider rate limits, proving that software "democratization" remains strictly metered by corporate bandwidth, imposing material limits on developer agency.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>5. The Cohere 402 Billing Wall (The Commercial Failure Cascade)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> March 21, 2026, at 15:52:52
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToCascadeStep('e2f11cb5-18ce-49ec-a31f-bc04b88c777d', 64)}
+                            >
+                              Investigating Search Data Mismatch.md (Step 64)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            The search tool failed completely due to consecutive "402 Payment Required" errors when a Cohere API billing threshold was crossed. The semantic search layer was suspended entirely by a commercial bug, demonstrating complete dependence on a commercial relationship.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>6. The GitHub Size Limit and the Clean Push (The Completeness Impossibility)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> April 2, 2026, at 10:58:45
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToCascadeStep('e5432998-2d3d-4e37-b6cc-9ef1855d4194', 67)}
+                            >
+                              Pushing Specific Folders To GitHub.md (Step 67)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            GitHub's free hosting limits threw 500 errors and rejected the 13GB repository, forcing a clean push that deleted the 15GB of raw OCR data. To deploy without enterprise capital, the repository had to be left architecturally incomplete.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
