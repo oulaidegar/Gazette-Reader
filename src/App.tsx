@@ -413,6 +413,19 @@ function App() {
                     </button>
                   </div>
 
+                  {chapter.id === 'context' && (
+                    <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
+                      <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}├── 📁 </span>
+                      <button 
+                        className="gopher-link"
+                        onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/thesis/context/evolution')}
+                        style={{ fontSize: '13px', marginLeft: '6px', fontWeight: 'bold' }}
+                      >
+                        [DIR] Historical and Legislative Evolution of the Gazette/
+                      </button>
+                    </div>
+                  )}
+
                   {/* Sub-item 2: Summary text */}
                   <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'flex-start', margin: '2px 0', fontSize: '12px', color: '#555' }}>
                     <span style={{ color: '#666', whiteSpace: 'pre' }}>{indentPrefix}{pipeChar}{chapter.id === 'materials' ? '├── ' : '└── '}📝 </span>
@@ -653,6 +666,56 @@ function App() {
       }
     });
 
+    const evolutionTimelineText = `
+19th Century Publications
+1864 (or 1867): The first official newspaper, the "Lebanon Official Gazette," was published in four pages in Arabic and French during the Mutasarrifate period under Mutasarrif Daoud Pasha.
+1888: The official "Beirut Province Gazette" was issued in Arabic and Turkish by the city's governor, Ali Pasha, to publish the news and orders of the Ottoman authorities.
+1891: The newspaper "Lebanon" was adopted by Wassa Pasha to publish Mutasarrifate government news, making it a semi-official publication.
+French Mandate & The Lebanese Republic
+1921: The "Official Gazette of Greater Lebanon" was launched in Arabic and French following General Gouraud's 1920 proclamation creating Greater Lebanon.
+1926: Following the adoption of the constitution and Lebanon's transformation into a republic, the publication's name was officially changed to the "Official Gazette of the Lebanese Republic".
+Regulation and Pricing Decrees
+December 28, 1959 (Decree No. 2870): Issued during Fouad Chehab's presidency, this decree defined the functions of the Official Gazette. Specifically, Paragraph (d) of Article 7 authorized the Directorate General of the Prime Minister's Office to manage the Gazette, publish its texts, and handle printing, distribution, and archiving.
+1975: A structural change occurred when the Official Gazette was transformed into a department strictly under the Prime Minister's Office.
+October 14, 1997 (Decree No. 1147): Article 2 of this decree governed the pricing of the Gazette, officially setting the annual subscription fee for the printed issues at 240,000 Lebanese pounds within Lebanon.
+The Digital Transition
+2004 (France): The French official gazette began publishing online for free.
+2005 (Lebanon): The Prime Minister's Office website began publishing the Official Gazette. By the end of the year, all issues were made available online for free.
+2015 / January 1, 2016 (France): The French government passed a law authorizing the complete elimination of their print version, making the French official gazette exclusively electronic and entirely free starting January 1, 2016.
+February 23, 2018 (Decree No. 2420): This decree officially ended free electronic publishing in Lebanon. The first article stipulated that the subscription fee for the electronic Official Gazette was set at 550,000 Lebanese pounds. As a result, the free section of the website was removed and replaced with a paywall requiring a prepaid card for access.
+General Laws Mentioned
+Right to Access Information Law (Undated): The text cites the first paragraph of Article 18 of this law, which explicitly states that "access to administrative documents is free of charge at their location, unless physical preservation of the document prevents it". The author uses this law to argue against the paid electronic subscription model.
+    `.toLowerCase();
+
+    if (
+      'historical and legislative evolution of the gazette'.includes(query) ||
+      'historical & legislative evolution of the gazette'.includes(query) ||
+      evolutionTimelineText.includes(query)
+    ) {
+      const idx = evolutionTimelineText.indexOf(query);
+      const start = Math.max(0, idx - 45);
+      const end = Math.min(evolutionTimelineText.length, idx + 55);
+      const snippetText = idx !== -1
+        ? `...${evolutionTimelineText.substring(start, end).replace(/\s+/g, ' ').trim()}...`
+        : 'Historical & Legislative Evolution of the Gazette (Chapter 1 Subfolder)';
+      results.push({
+        category: 'gopher',
+        title: 'Gopher: Historical & Legislative Evolution of the Gazette',
+        snippet: snippetText,
+        action: () => {
+          setScreenState('gopher');
+          setGopherPath('gopher://gazette.audit.lab/thesis/context/evolution');
+          setPathHistory(prev => [...prev, 'gopher://gazette.audit.lab/thesis/context/evolution']);
+          setExpandedDirs(prev => ({
+            ...prev,
+            'root_thesis': true,
+            'thesis_context': true
+          }));
+          setShowSearchDialog(false);
+        }
+      });
+    }
+
     if ('you need to absolutely readme before going into the website'.includes(query)) {
       results.push({
         category: 'gopher',
@@ -810,7 +873,10 @@ function App() {
         // Auto-expand directory depending on path
         if (gopher.startsWith('gopher://gazette.audit.lab/thesis')) {
           const parts = gopher.split('/');
-          const subId = parts[parts.length - 1]; // e.g. 'invoices', 'context', etc.
+          let subId = parts[parts.length - 1]; // e.g. 'invoices', 'context', etc.
+          if (subId === 'evolution') {
+            subId = 'context';
+          }
           setExpandedDirs(prev => ({
             ...prev,
             'root_thesis': true,
@@ -1326,16 +1392,136 @@ function App() {
               {/* Chapter 1: Lebanon Context Subpage */}
               {gopherPath === 'gopher://gazette.audit.lab/thesis/context' && (
                 <div className="gopher-document-view" style={{ maxWidth: '850px' }}>
+                  <div className="gopher-item-row" style={{ marginBottom: '16px', display: 'flex', gap: '20px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <span className="gopher-icon" style={{ marginRight: '6px' }}>📁</span>
+                      <button 
+                        className="gopher-link parent-dir"
+                        onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/thesis')}
+                      >
+                        .. (Up to higher level directory)
+                      </button>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <span className="gopher-icon" style={{ marginRight: '6px' }}>📁</span>
+                      <button 
+                        className="gopher-link"
+                        onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/thesis/context/evolution')}
+                        style={{ fontWeight: 'bold' }}
+                      >
+                        Historical and Legislative Evolution of the Gazette/
+                      </button>
+                    </div>
+                  </div>
+                  <LebanonOverview />
+                </div>
+              )}
+
+              {/* Chapter 1 Subfolder: Historical & Legislative Evolution of the Gazette */}
+              {gopherPath === 'gopher://gazette.audit.lab/thesis/context/evolution' && (
+                <div className="gopher-document-view" style={{ maxWidth: '850px' }}>
                   <div className="gopher-item-row" style={{ marginBottom: '16px' }}>
                     <span className="gopher-icon">📁</span>
                     <button 
                       className="gopher-link parent-dir"
-                      onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/thesis')}
+                      onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/thesis/context')}
                     >
-                      .. (Up to higher level directory)
+                      .. (Up to Chapter 1 directory)
                     </button>
                   </div>
-                  <LebanonOverview />
+
+                  <h2 className="gopher-doc-title">Historical &amp; Legislative Evolution of the Gazette</h2>
+                  <p style={{ fontStyle: 'italic', marginBottom: '16px', fontSize: '13px', color: '#444' }}>
+                    A chronological breakdown of every law, decree, and significant change regarding the Official Gazette.
+                  </p>
+
+                  <div className="outset-panel" style={{ 
+                    padding: '24px', 
+                    background: '#f8f9fa', 
+                    border: '2px solid #555', 
+                    boxShadow: 'inset 2px 2px 0 #fff, 3px 3px 0 rgba(0,0,0,0.15)',
+                    lineHeight: '1.6', 
+                    fontFamily: '"Courier New", Courier, monospace', 
+                    fontSize: '14.5px', 
+                    color: '#000' 
+                  }}>
+                    <div style={{ fontWeight: 'bold', borderBottom: '2px dashed #777', paddingBottom: '8px', marginBottom: '16px', color: 'var(--win-blue)' }}>
+                      === CHRONOLOGICAL LEGISLATIVE TIMELINE ===
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      
+                      <div>
+                        <strong style={{ color: 'var(--win-blue)', fontSize: '15px', textTransform: 'uppercase', display: 'block', borderBottom: '1px solid #ddd', paddingBottom: '2px', marginBottom: '6px' }}>19th Century Publications</strong>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                          <div>
+                            <strong>• 1864 (or 1867):</strong> The first official newspaper, the "Lebanon Official Gazette," was published in four pages in Arabic and French during the Mutasarrifate period under Mutasarrif Daoud Pasha.
+                          </div>
+                          <div>
+                            <strong>• 1888:</strong> The official "Beirut Province Gazette" was issued in Arabic and Turkish by the city's governor, Ali Pasha, to publish the news and orders of the Ottoman authorities.
+                          </div>
+                          <div>
+                            <strong>• 1891:</strong> The newspaper "Lebanon" was adopted by Wassa Pasha to publish Mutasarrifate government news, making it a semi-official publication.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <strong style={{ color: 'var(--win-blue)', fontSize: '15px', textTransform: 'uppercase', display: 'block', borderBottom: '1px solid #ddd', paddingBottom: '2px', marginBottom: '6px' }}>French Mandate &amp; The Lebanese Republic</strong>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                          <div>
+                            <strong>• 1921:</strong> The "Official Gazette of Greater Lebanon" was launched in Arabic and French following General Gouraud's 1920 proclamation creating Greater Lebanon.
+                          </div>
+                          <div>
+                            <strong>• 1926:</strong> Following the adoption of the constitution and Lebanon's transformation into a republic, the publication's name was officially changed to the "Official Gazette of the Lebanese Republic".
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <strong style={{ color: 'var(--win-blue)', fontSize: '15px', textTransform: 'uppercase', display: 'block', borderBottom: '1px solid #ddd', paddingBottom: '2px', marginBottom: '6px' }}>Regulation and Pricing Decrees</strong>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                          <div>
+                            <strong>• December 28, 1959 (Decree No. 2870):</strong> Issued during Fouad Chehab's presidency, this decree defined the functions of the Official Gazette. Specifically, Paragraph (d) of Article 7 authorized the Directorate General of the Prime Minister's Office to manage the Gazette, publish its texts, and handle printing, distribution, and archiving.
+                          </div>
+                          <div>
+                            <strong>• 1975:</strong> A structural change occurred when the Official Gazette was transformed into a department strictly under the Prime Minister's Office.
+                          </div>
+                          <div>
+                            <strong>• October 14, 1997 (Decree No. 1147):</strong> Article 2 of this decree governed the pricing of the Gazette, officially setting the annual subscription fee for the printed issues at 240,000 Lebanese pounds within Lebanon.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <strong style={{ color: 'var(--win-blue)', fontSize: '15px', textTransform: 'uppercase', display: 'block', borderBottom: '1px solid #ddd', paddingBottom: '2px', marginBottom: '6px' }}>The Digital Transition</strong>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                          <div>
+                            <strong>• 2004 (France):</strong> The French official gazette began publishing online for free.
+                          </div>
+                          <div>
+                            <strong>• 2005 (Lebanon):</strong> The Prime Minister's Office website began publishing the Official Gazette. By the end of the year, all issues were made available online for free.
+                          </div>
+                          <div>
+                            <strong>• 2015 / January 1, 2016 (France):</strong> The French government passed a law authorizing the complete elimination of their print version, making the French official gazette exclusively electronic and entirely free starting January 1, 2016.
+                          </div>
+                          <div>
+                            <strong>• February 23, 2018 (Decree No. 2420):</strong> This decree officially ended free electronic publishing in Lebanon. The first article stipulated that the subscription fee for the electronic Official Gazette was set at 550,000 Lebanese pounds. As a result, the free section of the website was removed and replaced with a paywall requiring a prepaid card for access.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <strong style={{ color: 'var(--win-blue)', fontSize: '15px', textTransform: 'uppercase', display: 'block', borderBottom: '1px solid #ddd', paddingBottom: '2px', marginBottom: '6px' }}>General Laws Mentioned</strong>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                          <div>
+                            <strong>• Right to Access Information Law (Undated):</strong> The text cites the first paragraph of Article 18 of this law, which explicitly states that <em>"access to administrative documents is free of charge at their location, unless physical preservation of the document prevents it"</em>. The author uses this law to argue against the paid electronic subscription model.
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
               )}
 
