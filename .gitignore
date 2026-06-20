@@ -26,4 +26,7 @@ dist-ssr
 # Ignore large raw PDF folder
 /Gazette sample issue /
 /Gazette sample issue/
+/thesis materials/
+/thesis materials /
+
 

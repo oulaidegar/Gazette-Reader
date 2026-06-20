@@ -195,6 +195,34 @@ function App() {
     setExpandedDirs(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const thesisMaterialsList = [
+    { name: '17175wPg#s.pdf', size: '289 KB' },
+    { name: '2023.findings-emnlp.175.pdf', size: '528 KB' },
+    { name: '2025.acl-long.166.pdf', size: '727 KB' },
+    { name: '2025.realm-1.9.pdf', size: '537 KB' },
+    { name: '3442188.3445922.pdf', size: '297 KB' },
+    { name: '9- The Reflective Practitioner_ How Professionals Think In Action.pdf', size: '1.62 MB' },
+    { name: 'AI and Epistemic Agency  How AI Influences Belief Revision and Its Normative Implications.pdf', size: '651 KB' },
+    { name: 'Ellis-AutoethnographyOverview-2011.pdf', size: '2.49 MB' },
+    { name: 'Schön - 1983 - The reflective practitioner how professionals think in action.pdf', size: '1.62 MB' },
+    { name: 'TechReg+2025-017+baeyaert.pdf', size: '258 KB' },
+    { name: 'Why AI Undermines Democracy and What To Do About It -- Mark Coeckelbergh -- 1, 2024 -- John Wiley & Sons -- isbn13 9781509560943 -- d6ad4aee6f0b2b7e7e6c54bfc6307035 -- Anna’s Archive.pdf', size: '4.01 MB' },
+    { name: '_OceanofPDF.com_Human-Centered_AI_-_Ben_Shneiderman.pdf', size: '8.64 MB' },
+    { name: '_OceanofPDF.com_Moralizing_Technology_-_Peter-Paul_Verbeek.pdf', size: '1.05 MB' },
+    { name: 'glaser-et-al-2021-the-biography-of-an-algorithm-performing-algorithmic-technologies-in-organizations.pdf', size: '191 KB' },
+    { name: 'obp.0192.06.pdf', size: '2.05 MB' },
+    { name: 'politikon_61.CON4.pdf', size: '138 KB' },
+    { name: 's00146-023-01635-y.pdf', size: '904 KB' },
+    { name: 's00146-024-01976-2.pdf', size: '860 KB' },
+    { name: 's00146-025-02769-x (1).pdf', size: '700 KB' },
+    { name: 's10462-025-11422-4.pdf', size: '3.57 MB' },
+    { name: 's10676-023-09742-6.pdf', size: '964 KB' },
+    { name: 's13347-013-0133-8.pdf', size: '216 KB' },
+    { name: 's13347-020-00405-8.pdf', size: '618 KB' },
+    { name: 's13347-021-00450-x.pdf', size: '1.00 MB' },
+    { name: 's43681-022-00239-4 (3).pdf', size: '761 KB' }
+  ];
+
   const thesisDb = thesisData as ThesisDatabase;
   const thesisChapters = [
     { id: 'context', title: 'Chapter 1: Geopolitical, Socio-Economic & Digital Infrastructure Overview', icon: '📁', summary: 'Geopolitical framework, demographic profiles, and network infrastructure of Lebanon' },
@@ -322,6 +350,25 @@ function App() {
         }
         if (prog >= 100) {
           clearInterval(interval);
+          
+          // Trigger actual browser file download
+          const isThesisMaterial = thesisMaterialsList.some(m => m.name === name);
+          let fileUrl = `./invoices/${name}`;
+          if (isThesisMaterial) {
+            fileUrl = `./thesis_materials/${name}`;
+          } else if (name === 'thesis_materials.zip') {
+            fileUrl = `./thesis_materials.zip`;
+          } else if (['scraper_convs_db.json', 'official_gazette_2025_manifest.json', 'cohere_402_billing_crash.log'].includes(name)) {
+            fileUrl = `./${name}`;
+          }
+          
+          const a = document.createElement('a');
+          a.href = fileUrl;
+          a.download = name;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+
           return { ...prev, progress: 100 };
         }
         return { ...prev, progress: prog };
@@ -436,33 +483,47 @@ function App() {
                   {chapter.id === 'materials' && (
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                       <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
-                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}├── 📕 </span>
-                        <span style={{ marginLeft: '6px', color: '#222' }}>Thesis_Booklet_Complete_Draft.pdf (1.8 MB)</span>
-                        <button className="netscape-download-btn" style={{ marginLeft: '10px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog('Thesis_Booklet_Complete_Draft.pdf', '1.8 MB')}>
-                          [Download]
+                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}├── 📦 </span>
+                        <button 
+                          className="gopher-link"
+                          onClick={() => triggerDownloadDialog('thesis_materials.zip', '29.4 MB')}
+                          style={{ fontSize: '13px', marginLeft: '6px', fontWeight: 'bold', color: 'var(--win-blue)' }}
+                        >
+                          [ZIP] Download All (Bulk ZIP)/
                         </button>
                       </div>
-                      <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
-                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}├── 📕 </span>
-                        <span style={{ marginLeft: '6px', color: '#222' }}>Chapter_2_ANT_Theoretical_Framework.pdf (512 KB)</span>
-                        <button className="netscape-download-btn" style={{ marginLeft: '10px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog('Chapter_2_ANT_Theoretical_Framework.pdf', '512 KB')}>
-                          [Download]
-                        </button>
-                      </div>
-                      <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
-                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}├── 📄 </span>
-                        <span style={{ marginLeft: '6px', color: '#222' }}>scraper_convs_db.json (65 KB)</span>
-                        <button className="netscape-download-btn" style={{ marginLeft: '10px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog('scraper_convs_db.json', '65 KB')}>
-                          [Download]
-                        </button>
-                      </div>
-                      <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
-                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}└── 📄 </span>
-                        <span style={{ marginLeft: '6px', color: '#222' }}>official_gazette_2025_manifest.json (34 KB)</span>
-                        <button className="netscape-download-btn" style={{ marginLeft: '10px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog('official_gazette_2025_manifest.json', '34 KB')}>
-                          [Download]
-                        </button>
-                      </div>
+                      {thesisMaterialsList.map((item, idx) => {
+                        const isLastItem = idx === thesisMaterialsList.length - 1;
+                        const branch = isLastItem ? '└── ' : '├── ';
+                        return (
+                          <div key={item.name} className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
+                            <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}{branch}📕 </span>
+                            <button 
+                              className="gopher-link"
+                              onClick={() => {
+                                setReadingPdfPath(item.name);
+                                setReadingPdfName(item.name);
+                              }}
+                              style={{ 
+                                fontSize: '13px', 
+                                marginLeft: '6px', 
+                                maxWidth: '280px', 
+                                overflow: 'hidden', 
+                                textOverflow: 'ellipsis', 
+                                whiteSpace: 'nowrap',
+                                textAlign: 'left'
+                              }}
+                              title={`Read ${item.name}`}
+                            >
+                              [DOC] {item.name}
+                            </button>
+                            <span style={{ marginLeft: '4px', color: '#555', fontSize: '11px' }}>({item.size})</span>
+                            <button className="netscape-download-btn" style={{ marginLeft: '8px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog(item.name, item.size)}>
+                              [Save]
+                            </button>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
 
@@ -590,6 +651,8 @@ function App() {
   const [showAboutDialog, setShowAboutDialog] = useState<boolean>(false);
   const [showManifestoDialog, setShowManifestoDialog] = useState<boolean>(false);
   const [showAnalysisDialog, setShowAnalysisDialog] = useState<boolean>(false);
+  const [readingPdfPath, setReadingPdfPath] = useState<string | null>(null);
+  const [readingPdfName, setReadingPdfName] = useState<string | null>(null);
   const [showSearchDialog, setShowSearchDialog] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [samplePage, setSamplePage] = useState<number>(1);
@@ -2303,61 +2366,80 @@ The scraper having worked, and the files being stored in their respective years 
                     Click on any of the academic preprints, data manifests, or core log files below to trigger a local file download via Netscape's saving interface.
                   </p>
 
-                  <div className="gopher-materials-section" style={{ background: '#dcdcdc', border: '1px solid #999' }}>
+                  <div style={{ display: 'flex', gap: '12px', marginBottom: '16px', alignItems: 'center' }}>
+                    <a 
+                      href={`./thesis_materials.zip`}
+                      download="thesis_materials.zip"
+                      className="win-button"
+                      style={{ 
+                        textDecoration: 'none', 
+                        display: 'inline-flex', 
+                        alignItems: 'center', 
+                        gap: '6px', 
+                        padding: '6px 16px', 
+                        fontSize: '12px', 
+                        fontWeight: 'bold', 
+                        color: '#000',
+                        boxShadow: '1px 1px 0px #fff inset, 1px 1px 0px #000'
+                      }}
+                    >
+                      📦 Download All Files (Bulk ZIP)
+                    </a>
+                    <span style={{ fontSize: '11px', color: '#555' }}>
+                      Contains all 25 PDF preprints and theoretical texts.
+                    </span>
+                  </div>
+
+                  <div className="gopher-materials-section" style={{ background: '#dcdcdc', border: '1px solid #999', padding: '8px' }}>
                     <h3 style={{ fontSize: '14px', fontWeight: 'bold', borderBottom: '1px solid #333', paddingBottom: '4px', marginBottom: '10px' }}>
                       📂 Available Archive Files
                     </h3>
-                    <div className="gopher-materials-list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      <div className="gopher-material-item">
-                        <span style={{ fontSize: '20px' }}>📕</span>
-                        <div className="material-info">
-                          <span className="material-name">Thesis_Booklet_Complete_Draft.pdf</span>
-                          <span className="material-size">(1.8 MB)</span>
+                    <div className="gopher-materials-list" style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '10px', background: '#fff', border: '1px inset #999', maxHeight: '420px', overflowY: 'auto' }}>
+                      {thesisMaterialsList.map((item) => (
+                        <div key={item.name} className="gopher-material-item" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px', borderBottom: '1px solid #eee' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ fontSize: '20px' }}>📕</span>
+                            <div className="material-info" style={{ display: 'flex', flexDirection: 'column' }}>
+                              <span 
+                                className="material-name" 
+                                style={{ 
+                                  fontWeight: 'bold', 
+                                  color: '#0000ee', 
+                                  textDecoration: 'underline', 
+                                  cursor: 'pointer',
+                                  fontSize: '12.5px'
+                                }}
+                                onClick={() => {
+                                  setReadingPdfPath(item.name);
+                                  setReadingPdfName(item.name);
+                                }}
+                              >
+                                {item.name}
+                              </span>
+                              <span className="material-size" style={{ fontSize: '11px', color: '#666' }}>Size: {item.size}</span>
+                            </div>
+                          </div>
+                          <div style={{ display: 'flex', gap: '6px' }}>
+                            <button 
+                              className="win-button"
+                              onClick={() => {
+                                  setReadingPdfPath(item.name);
+                                  setReadingPdfName(item.name);
+                              }}
+                              style={{ padding: '3px 8px', fontSize: '11px', cursor: 'pointer' }}
+                            >
+                              📖 Read
+                            </button>
+                            <button 
+                              className="netscape-download-btn" 
+                              onClick={() => triggerDownloadDialog(item.name, item.size)}
+                              style={{ padding: '3px 8px', fontSize: '11px' }}
+                            >
+                              Save File
+                            </button>
+                          </div>
                         </div>
-                        <button className="netscape-download-btn" onClick={() => triggerDownloadDialog('Thesis_Booklet_Complete_Draft.pdf', '1.8 MB')}>
-                          Download File
-                        </button>
-                      </div>
-                      <div className="gopher-material-item">
-                        <span style={{ fontSize: '20px' }}>📕</span>
-                        <div className="material-info">
-                          <span className="material-name">Chapter_2_ANT_Theoretical_Framework.pdf</span>
-                          <span className="material-size">(512 KB)</span>
-                        </div>
-                        <button className="netscape-download-btn" onClick={() => triggerDownloadDialog('Chapter_2_ANT_Theoretical_Framework.pdf', '512 KB')}>
-                          Download File
-                        </button>
-                      </div>
-                      <div className="gopher-material-item">
-                        <span style={{ fontSize: '20px' }}>📄</span>
-                        <div className="material-info">
-                          <span className="material-name">scraper_convs_db.json</span>
-                          <span className="material-size">(65 KB)</span>
-                        </div>
-                        <button className="netscape-download-btn" onClick={() => triggerDownloadDialog('scraper_convs_db.json', '65 KB')}>
-                          Download File
-                        </button>
-                      </div>
-                      <div className="gopher-material-item">
-                        <span style={{ fontSize: '20px' }}>📄</span>
-                        <div className="material-info">
-                          <span className="material-name">official_gazette_2025_manifest.json</span>
-                          <span className="material-size">(34 KB)</span>
-                        </div>
-                        <button className="netscape-download-btn" onClick={() => triggerDownloadDialog('official_gazette_2025_manifest.json', '34 KB')}>
-                          Download File
-                        </button>
-                      </div>
-                      <div className="gopher-material-item">
-                        <span style={{ fontSize: '20px' }}>📄</span>
-                        <div className="material-info">
-                          <span className="material-name">cohere_402_billing_crash.log</span>
-                          <span className="material-size">(112 KB)</span>
-                        </div>
-                        <button className="netscape-download-btn" onClick={() => triggerDownloadDialog('cohere_402_billing_crash.log', '112 KB')}>
-                          Download File
-                        </button>
-                      </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -2927,8 +3009,14 @@ The scraper having worked, and the files being stored in their respective years 
                           'Supabase Receipt 1.pdf',
                           'Supabase Recipet 2 .pdf'
                         ];
+                        const isThesisMaterial = thesisMaterialsList.some(m => m.name === downloadFileState.name);
+                        
                         if (invoiceFiles.includes(downloadFileState.name)) {
                           window.open(`./invoices/${downloadFileState.name}`, '_blank');
+                        } else if (isThesisMaterial) {
+                          window.open(`./thesis_materials/${downloadFileState.name}`, '_blank');
+                        } else if (downloadFileState.name === 'thesis_materials.zip') {
+                          window.open(`./thesis_materials.zip`, '_blank');
                         } else {
                           alert(`Simulated open: Displaying raw content of ${downloadFileState.name}`);
                         }
@@ -4563,6 +4651,51 @@ The scraper having worked, and the files being stored in their respective years 
             <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '8px', background: 'var(--win-gray)', borderTop: '1px solid var(--win-dark-gray)' }}>
               <button className="win-button" onClick={() => setShowAnalysisDialog(false)} style={{ width: '80px' }}>
                 DISMISS
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* PDF VIEWER MODAL DIALOG */}
+      {readingPdfPath && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0,0,0,0.5)',
+          zIndex: 1100,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <div className="outset-panel" style={{ width: '850px', maxWidth: '95vw', height: '80vh', padding: '2px', display: 'flex', flexDirection: 'column' }}>
+            <div className="win-title-bar">
+              <span>PDF Viewer - {readingPdfName}</span>
+              <button className="win-sys-btn" onClick={() => { setReadingPdfPath(null); setReadingPdfName(null); }}>X</button>
+            </div>
+            <div style={{ flex: 1, background: '#fff', border: '2px inset var(--win-dark-gray)', position: 'relative' }}>
+              <iframe 
+                src={`./thesis_materials/${readingPdfPath}`}
+                style={{ width: '100%', height: '100%', border: 'none' }}
+                title={readingPdfName || 'PDF Viewer'}
+              />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', padding: '8px', background: 'var(--win-gray)', borderTop: '1px solid var(--win-dark-gray)' }}>
+              <button 
+                className="win-button"
+                onClick={() => {
+                  const item = thesisMaterialsList.find(m => m.name === readingPdfName);
+                  triggerDownloadDialog(readingPdfName || '', item ? item.size : '1.0 MB');
+                }}
+                style={{ padding: '4px 12px', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}
+              >
+                <span>💾</span> Download
+              </button>
+              <button className="win-button" onClick={() => { setReadingPdfPath(null); setReadingPdfName(null); }} style={{ width: '80px' }}>
+                CLOSE
               </button>
             </div>
           </div>
