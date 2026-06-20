@@ -204,7 +204,8 @@ function App() {
     { id: 'gource', title: 'Special Exhibit 2: Gource Repository Evolution Visualizer', icon: '☄️', summary: 'Live HTML5 Canvas simulation of repository commits & git instructions' },
     { id: 'materials', title: 'Chapter 4: Theoretical Framework Materials & Downloads', icon: '💾', summary: 'Academic preprints, data manifests, and core log files' },
     { id: 'vibecoder', title: 'Special Exhibit 3: The Way of Code - The Vibe Coder', icon: '📁', summary: 'The Timeless Art of Vibe Coding (Adapted from Lao Tzu by Rick Rubin)' },
-    { id: 'invoices', title: 'Special Exhibit 4: Accumulative Audit Invoices & Financial Costs', icon: '📁', summary: 'Financial receipts and costs accumulated during the thesis auditing project' }
+    { id: 'invoices', title: 'Special Exhibit 4: Accumulative Audit Invoices & Financial Costs', icon: '📁', summary: 'Financial receipts and costs accumulated during the thesis auditing project' },
+    { id: 'sample_issue', title: 'Special Exhibit 5: 2025 Official Gazette Sample Issue Reader', icon: '📖', summary: 'Interactive page-by-page reader of the late 2025 Gazette issue with zoom and download capabilities' }
   ];
 
 
@@ -508,6 +509,17 @@ function App() {
                     </div>
                   )}
 
+                  {chapter.id === 'sample_issue' && (
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'flex-start', margin: '2px 0', fontSize: '12px', color: '#222' }}>
+                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}└── 📖 </span>
+                        <span style={{ marginLeft: '6px', fontStyle: 'italic' }}>
+                          Opens an interactive page-by-page reader of Gazette Issue #9234 with pagination, zoom, and individual page downloads.
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
                 </div>
               )}
             </div>
@@ -553,6 +565,8 @@ function App() {
   const [showManifestoDialog, setShowManifestoDialog] = useState<boolean>(false);
   const [showSearchDialog, setShowSearchDialog] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [samplePage, setSamplePage] = useState<number>(1);
+  const [sampleZoom, setSampleZoom] = useState<number>(1.0);
 
   interface SearchResult {
     category: 'gopher' | 'timeline' | 'scraper' | 'gemini_chat' | 'whatsapp';
@@ -1993,6 +2007,140 @@ function App() {
                           Download File
                         </button>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Special Exhibit 5: 2025 Official Gazette Sample Issue Reader */}
+              {gopherPath === 'gopher://gazette.audit.lab/thesis/sample_issue' && (
+                <div className="gopher-document-view" style={{ maxWidth: '1000px' }}>
+                  <div className="gopher-item-row" style={{ marginBottom: '16px' }}>
+                    <span className="gopher-icon">📁</span>
+                    <button 
+                      className="gopher-link parent-dir"
+                      onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/thesis')}
+                    >
+                      .. (Up to higher level directory)
+                    </button>
+                  </div>
+
+                  <h2 className="gopher-doc-title">2025 Official Gazette Sample Issue Reader</h2>
+                  <p style={{ fontStyle: 'italic', marginBottom: '16px', fontSize: '13px', color: '#444' }}>
+                    Interactive document explorer for Gazette Issue #9234 (late 2025). Use the toolbar below to navigate page-by-page, adjust zoom, and download individual pages.
+                  </p>
+
+                  {/* Reader Toolbar (Windows 95 Outset style) */}
+                  <div className="outset-panel" style={{ 
+                    padding: '8px', 
+                    background: 'var(--win-gray)', 
+                    border: '2px solid var(--win-dark-gray)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    flexWrap: 'wrap',
+                    gap: '12px',
+                    marginBottom: '16px',
+                    fontFamily: 'monospace'
+                  }}>
+                    {/* Navigation controls */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <button 
+                        className="win-button" 
+                        disabled={samplePage <= 1}
+                        onClick={() => setSamplePage(prev => Math.max(1, prev - 1))}
+                        style={{ minWidth: '70px', height: '24px', fontSize: '11px' }}
+                      >
+                        [◀ Prev]
+                      </button>
+                      <span style={{ fontSize: '12px', color: 'black', fontWeight: 'bold' }}>
+                        Page {samplePage} of 280
+                      </span>
+                      <button 
+                        className="win-button" 
+                        disabled={samplePage >= 280}
+                        onClick={() => setSamplePage(prev => Math.min(280, prev + 1))}
+                        style={{ minWidth: '70px', height: '24px', fontSize: '11px' }}
+                      >
+                        [Next ▶]
+                      </button>
+                    </div>
+
+                    {/* Zoom controls */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <button 
+                        className="win-button" 
+                        disabled={sampleZoom <= 0.5}
+                        onClick={() => setSampleZoom(prev => Math.max(0.5, prev - 0.25))}
+                        style={{ width: '32px', height: '24px', fontSize: '11px', fontWeight: 'bold' }}
+                      >
+                        -
+                      </button>
+                      <span style={{ fontSize: '12px', color: 'black', fontWeight: 'bold', width: '50px', textAlign: 'center' }}>
+                        {Math.round(sampleZoom * 100)}%
+                      </span>
+                      <button 
+                        className="win-button" 
+                        disabled={sampleZoom >= 2.5}
+                        onClick={() => setSampleZoom(prev => Math.min(2.5, prev + 0.25))}
+                        style={{ width: '32px', height: '24px', fontSize: '11px', fontWeight: 'bold' }}
+                      >
+                        +
+                      </button>
+                      <button 
+                        className="win-button" 
+                        onClick={() => setSampleZoom(1.0)}
+                        style={{ height: '24px', fontSize: '11px' }}
+                      >
+                        100%
+                      </button>
+                    </div>
+
+                    {/* Download control */}
+                    <div>
+                      <a 
+                        href={`./gazette_sample/page-${String(samplePage).padStart(3, '0')}.jpg`} 
+                        download={`Gazette_Issue_9234_Page_${String(samplePage).padStart(3, '0')}.jpg`}
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <button className="win-button" style={{ height: '24px', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px', color: 'green', fontWeight: 'bold' }}>
+                          💾 Download Page
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Document Display Canvas */}
+                  <div style={{ 
+                    background: '#555', 
+                    border: '2px solid black', 
+                    padding: '20px', 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center',
+                    overflow: 'auto',
+                    maxHeight: '650px',
+                    minHeight: '400px',
+                    position: 'relative',
+                    boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.5)'
+                  }}>
+                    <div style={{
+                      transform: `scale(${sampleZoom})`,
+                      transformOrigin: 'center center',
+                      transition: 'transform 0.15s ease-out',
+                      display: 'inline-block'
+                    }}>
+                      <img 
+                        src={`./gazette_sample/page-${String(samplePage).padStart(3, '0')}.jpg`} 
+                        alt={`Gazette Page ${samplePage}`}
+                        style={{ 
+                          maxWidth: '100%', 
+                          height: 'auto', 
+                          border: '2px solid white',
+                          boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
+                          display: 'block'
+                        }} 
+                      />
                     </div>
                   </div>
                 </div>
