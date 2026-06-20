@@ -551,6 +551,218 @@ function App() {
   // Custom retro popup modals
   const [showAboutDialog, setShowAboutDialog] = useState<boolean>(false);
   const [showManifestoDialog, setShowManifestoDialog] = useState<boolean>(false);
+  const [showSearchDialog, setShowSearchDialog] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  interface SearchResult {
+    category: 'gopher' | 'timeline' | 'scraper' | 'gemini_chat' | 'whatsapp';
+    title: string;
+    snippet: string;
+    action: () => void;
+  }
+
+  const getSearchResults = (): SearchResult[] => {
+    if (!searchQuery.trim()) return [];
+    const query = searchQuery.toLowerCase();
+    const results: SearchResult[] = [];
+
+    // 1. Gopher pages
+    thesisChapters.forEach((ch) => {
+      const matchTitle = ch.title.toLowerCase().includes(query);
+      const matchSummary = ch.summary.toLowerCase().includes(query);
+      
+      let matchCriteriaText = '';
+      if (ch.id === 'criteria') {
+        thesisDb.criteria.forEach((crit) => {
+          if (crit.title.toLowerCase().includes(query) || crit.definition.toLowerCase().includes(query) || crit.empirical.toLowerCase().includes(query)) {
+            matchCriteriaText += ` ${crit.title} ${crit.definition} ${crit.empirical}`;
+          }
+        });
+      }
+
+      let matchVibecoderText = '';
+      if (ch.id === 'vibecoder') {
+        (vibecoderData as any[]).forEach((item) => {
+          if (item.text.toLowerCase().includes(query)) {
+            matchVibecoderText += ` ${item.text}`;
+          }
+        });
+      }
+
+      if (matchTitle || matchSummary || matchCriteriaText || matchVibecoderText) {
+        let snippet = ch.summary;
+        if (matchCriteriaText) snippet = `Matches criteria text: ...${matchCriteriaText.substring(0, 100)}...`;
+        else if (matchVibecoderText) {
+          const idx = matchVibecoderText.toLowerCase().indexOf(query);
+          snippet = `Matches text: ...${matchVibecoderText.substring(Math.max(0, idx - 40), Math.min(matchVibecoderText.length, idx + 60))}...`;
+        }
+
+        results.push({
+          category: 'gopher',
+          title: `Gopher: ${ch.title}`,
+          snippet,
+          action: () => {
+            setScreenState('gopher');
+            setGopherPath(`gopher://gazette.audit.lab/thesis/${ch.id}`);
+            setPathHistory(prev => [...prev, `gopher://gazette.audit.lab/thesis/${ch.id}`]);
+            setExpandedDirs(prev => ({
+              ...prev,
+              'root_thesis': true,
+              [`thesis_${ch.id}`]: true
+            }));
+            if (ch.id === 'criteria' && matchCriteriaText) {
+              const matchedCritIdx = thesisDb.criteria.findIndex(crit => 
+                crit.title.toLowerCase().includes(query) || 
+                crit.definition.toLowerCase().includes(query) || 
+                crit.empirical.toLowerCase().includes(query)
+              );
+              if (matchedCritIdx !== -1) {
+                setActivePillarIndex(matchedCritIdx);
+              }
+            }
+            setShowSearchDialog(false);
+          }
+        });
+      }
+    });
+
+    if ('you need to absolutely readme before going into the website'.includes(query)) {
+      results.push({
+        category: 'gopher',
+        title: 'Gopher: README Warning Folder',
+        snippet: 'You need to absolutely Readme before going into the website',
+        action: () => {
+          setScreenState('gopher');
+          setGopherPath('gopher://gazette.audit.lab/readme');
+          setPathHistory(prev => [...prev, 'gopher://gazette.audit.lab/readme']);
+          setExpandedDirs(prev => ({ ...prev, 'root_readme': true }));
+          setShowSearchDialog(false);
+        }
+      });
+    }
+
+    // 2. Dev Timeline (logsData/cascades)
+    cascades.forEach((cascade) => {
+      cascade.steps.forEach((step) => {
+        const matchName = step.name.toLowerCase().includes(query);
+        const matchContent = step.content?.toLowerCase().includes(query);
+        const matchCommand = step.command?.toLowerCase().includes(query);
+        const matchNote = step.margin_note?.toLowerCase().includes(query);
+
+        if (matchName || matchContent || matchCommand || matchNote) {
+          let snippet = '';
+          if (matchCommand) snippet = `Command: \`${step.command}\``;
+          else if (matchNote) snippet = `Note: "${step.margin_note}"`;
+          else if (matchContent && step.content) {
+            const idx = step.content.toLowerCase().indexOf(query);
+            snippet = `Code: ...${step.content.substring(Math.max(0, idx - 30), Math.min(step.content.length, idx + 50)).replace(/\n/g, ' ')}...`;
+          } else {
+            snippet = `Step: ${step.name}`;
+          }
+
+          results.push({
+            category: 'timeline',
+            title: `Timeline: ${cascade.name} (Step ${step.index + 1})`,
+            snippet,
+            action: () => {
+              setScreenState('app');
+              setActiveTab('timeline');
+              setSelectedCascadeId(cascade.id);
+              setTimeout(() => {
+                setPlaybackIndex(step.index);
+              }, 100);
+              setShowSearchDialog(false);
+            }
+          });
+        }
+      });
+    });
+
+    // 3. Scraper Evolution
+    scraperConvs.forEach((conv, index) => {
+      const matchPrompt = conv.prompt.toLowerCase().includes(query);
+      const matchCode = conv.code_block.toLowerCase().includes(query);
+      const matchOpen = conv.opening_remarks.toLowerCase().includes(query);
+      const matchClose = conv.closing_remarks.toLowerCase().includes(query);
+
+      if (matchPrompt || matchCode || matchOpen || matchClose) {
+        let snippet = '';
+        if (matchPrompt) snippet = `Prompt: "${conv.prompt.substring(0, 80)}..."`;
+        else if (matchCode) {
+          const idx = conv.code_block.toLowerCase().indexOf(query);
+          snippet = `Code: ...${conv.code_block.substring(Math.max(0, idx - 30), Math.min(conv.code_block.length, idx + 50)).replace(/\n/g, ' ')}...`;
+        } else {
+          snippet = `Remarks: "${(conv.opening_remarks || conv.closing_remarks).substring(0, 80)}..."`;
+        }
+
+        results.push({
+          category: 'scraper',
+          title: `Scraper Interaction v${index + 1} (${conv.timestamp})`,
+          snippet,
+          action: () => {
+            setScreenState('app');
+            setActiveTab('scraper');
+            setScraperVersion(index + 1);
+            setShowSearchDialog(false);
+          }
+        });
+      }
+    });
+
+    // 4. Gemini Chat
+    geminiChatConvs.forEach((conv, index) => {
+      const matchPrompt = conv.prompt.toLowerCase().includes(query);
+      const matchCode = conv.code_block.toLowerCase().includes(query);
+      const matchOpen = conv.opening_remarks.toLowerCase().includes(query);
+      const matchClose = conv.closing_remarks.toLowerCase().includes(query);
+
+      if (matchPrompt || matchCode || matchOpen || matchClose) {
+        let snippet = '';
+        if (matchPrompt) snippet = `Prompt: "${conv.prompt.substring(0, 80)}..."`;
+        else if (matchCode) {
+          const idx = conv.code_block.toLowerCase().indexOf(query);
+          snippet = `Code: ...${conv.code_block.substring(Math.max(0, idx - 30), Math.min(conv.code_block.length, idx + 50)).replace(/\n/g, ' ')}...`;
+        } else {
+          snippet = `Remarks: "${(conv.opening_remarks || conv.closing_remarks).substring(0, 80)}..."`;
+        }
+
+        results.push({
+          category: 'gemini_chat',
+          title: `Gemini Chat Interaction v${index + 1} (${conv.timestamp})`,
+          snippet,
+          action: () => {
+            setScreenState('app');
+            setActiveTab('gemini_chat');
+            setGeminiChatVersion(index + 1);
+            setShowSearchDialog(false);
+          }
+        });
+      }
+    });
+
+    // 5. WhatsApp Chats
+    const chats = ['uncle', 'gazette'];
+    chats.forEach((chatId) => {
+      const msgs = (whatsappChatsData as any)[chatId] || [];
+      msgs.forEach((msg: any) => {
+        if (msg.content?.toLowerCase().includes(query) || msg.sender?.toLowerCase().includes(query)) {
+          results.push({
+            category: 'whatsapp',
+            title: `WhatsApp [${chatId === 'uncle' ? 'Uncle Chat' : 'Gazette Chat'}]: ${msg.sender} (${msg.time})`,
+            snippet: msg.content,
+            action: () => {
+              setScreenState('app');
+              setActiveTab('whatsapp_chats');
+              setActiveWhatsappChat(chatId as any);
+              setShowSearchDialog(false);
+            }
+          });
+        }
+      });
+    });
+
+    return results.slice(0, 50);
+  };
 
   // Handle URL deep linking for thesis supervisor
   useEffect(() => {
@@ -877,6 +1089,7 @@ function App() {
           <button className="menu-item-btn" onClick={() => alert("Chapters & portal bookmarked!")}><span>B</span>ookmarks</button>
           <button className="menu-item-btn" onClick={() => alert("Network Connections: DNS Resolved")}><span>O</span>ptions</button>
           <button className="menu-item-btn" onClick={() => alert("Auditing Directory Active")}><span>D</span>irectory</button>
+          <button className="menu-item-btn" onClick={() => setShowSearchDialog(true)}><span>S</span>earch</button>
           <button className="menu-item-btn" onClick={() => alert("Netscape Navigator v2.0 - Gopher Portal Client")}><span>H</span>elp</button>
         </div>
 
@@ -919,7 +1132,7 @@ function App() {
             🖨️
             Print
           </button>
-          <button className="netscape-btn" onClick={() => alert("Gopher search indexing active at main server.")}>
+          <button className="netscape-btn" onClick={() => setShowSearchDialog(true)}>
             🔍
             Find
           </button>
@@ -1925,6 +2138,9 @@ function App() {
         </button>
         <button className="menu-item-btn" onClick={() => setActiveTab('failures')}>
           <span>A</span>uditing
+        </button>
+        <button className="menu-item-btn" onClick={() => setShowSearchDialog(true)} style={{ color: '#1d4ed8', fontWeight: 'bold' }}>
+          🔍 <span>S</span>earch
         </button>
         <button className="menu-item-btn" onClick={() => setShowAboutDialog(true)}>
           <span>H</span>elp
@@ -3370,6 +3586,143 @@ function App() {
             <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '8px', background: 'var(--win-gray)', borderTop: '1px solid var(--win-dark-gray)' }}>
               <button className="win-button" onClick={() => setShowManifestoDialog(false)} style={{ width: '80px' }}>
                 DISMISS
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* RETRO SEARCH PORTAL MODAL */}
+      {showSearchDialog && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0,0,0,0.5)',
+          zIndex: 1000,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <div className="outset-panel" style={{ width: '600px', padding: '2px', display: 'flex', flexDirection: 'column', maxHeight: '85%' }}>
+            <div className="win-title-bar">
+              <span>Find Files & Transcripts - Search Portal</span>
+              <button className="win-sys-btn" onClick={() => setShowSearchDialog(false)}>X</button>
+            </div>
+            
+            {/* Search Input Area */}
+            <div style={{ padding: '12px', borderBottom: '1px solid var(--win-dark-gray)', background: 'var(--win-gray)' }}>
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'black' }}>Named:</span>
+                <input 
+                  type="text" 
+                  className="win-input" 
+                  value={searchQuery} 
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Type search query (e.g. 402, billing, Arabic, commit, Fusha)..."
+                  style={{ flex: 1, padding: '4px 6px', fontSize: '12px', fontFamily: 'monospace' }}
+                  autoFocus
+                />
+                <button className="win-button" onClick={() => setSearchQuery('')} style={{ width: '60px' }}>
+                  Clear
+                </button>
+              </div>
+            </div>
+
+            {/* Results Area */}
+            <div style={{ 
+              flex: 1, 
+              padding: '12px', 
+              overflowY: 'auto', 
+              background: 'white', 
+              color: 'black', 
+              minHeight: '200px',
+              maxHeight: '400px',
+              fontFamily: 'monospace',
+              fontSize: '12px'
+            }}>
+              {searchQuery.trim() === '' ? (
+                <div style={{ color: '#666', textAlign: 'center', marginTop: '40px' }}>
+                  <p style={{ fontSize: '24px', marginBottom: '8px' }}>🔍</p>
+                  Enter a query to search the Gazette Auditing Laboratory database.<br />
+                  Indexes: Gopher pages, timeline steps, scraper logs, chats, and transcripts.
+                </div>
+              ) : (
+                <div>
+                  <div style={{ borderBottom: '1px dotted #999', paddingBottom: '4px', marginBottom: '8px', fontWeight: 'bold', color: '#333' }}>
+                    Search Results ({getSearchResults().length} matches found):
+                  </div>
+                  {getSearchResults().length === 0 ? (
+                    <div style={{ color: 'red', textAlign: 'center', marginTop: '20px' }}>
+                      No matches found for "{searchQuery}".
+                    </div>
+                  ) : (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      {getSearchResults().map((result, idx) => {
+                        let catColor = '#1d4ed8'; // blue
+                        let catLabel = 'Gopher';
+                        if (result.category === 'timeline') {
+                          catColor = '#15803d'; // green
+                          catLabel = 'Timeline';
+                        } else if (result.category === 'scraper') {
+                          catColor = '#b45309'; // amber
+                          catLabel = 'Scraper';
+                        } else if (result.category === 'gemini_chat') {
+                          catColor = '#6d28d9'; // purple
+                          catLabel = 'Gemini';
+                        } else if (result.category === 'whatsapp') {
+                          catColor = '#be185d'; // pink
+                          catLabel = 'WhatsApp';
+                        }
+
+                        return (
+                          <div 
+                            key={idx} 
+                            onClick={result.action}
+                            className="search-result-item"
+                            style={{ 
+                              padding: '8px', 
+                              border: '1px solid #ccc', 
+                              borderRadius: '2px', 
+                              cursor: 'pointer',
+                              background: '#f9f9f9',
+                              transition: 'background 0.1s'
+                            }}
+                            onMouseEnter={(e) => e.currentTarget.style.background = '#e0f2fe'}
+                            onMouseLeave={(e) => e.currentTarget.style.background = '#f9f9f9'}
+                          >
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                              <span style={{ fontWeight: 'bold', color: 'black' }}>{result.title}</span>
+                              <span style={{ 
+                                fontSize: '10px', 
+                                background: catColor, 
+                                color: 'white', 
+                                padding: '1px 5px', 
+                                borderRadius: '3px',
+                                textTransform: 'uppercase',
+                                fontWeight: 'bold'
+                              }}>
+                                {catLabel}
+                              </span>
+                            </div>
+                            <div style={{ color: '#444', fontSize: '11px', whiteSpace: 'pre-wrap' }}>
+                              {result.snippet}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Footer buttons */}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '8px', background: 'var(--win-gray)', borderTop: '1px solid var(--win-dark-gray)' }}>
+              <button className="win-button" onClick={() => setShowSearchDialog(false)} style={{ width: '80px' }}>
+                Cancel
               </button>
             </div>
           </div>
