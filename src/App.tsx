@@ -1294,7 +1294,7 @@ function App() {
                         onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/thesis')}
                         style={{ fontWeight: 'bold' }}
                       >
-                        Thesis & Theoretical Framework Directory/
+                        Thesis Appendix Directory/
                       </button>
                     </div>
                     {expandedDirs['root_thesis'] && (
@@ -2293,6 +2293,93 @@ function App() {
                       <strong>3. THESIS CONTEXT & APPENDICES</strong><br />
                       This web application serves as the interactive <strong>appendices</strong> of my academic thesis auditing project. It compiles developer logs, translation case studies, git commits, WhatsApp dialogue history, and financial receipts to provide a complete, transparent, and multi-dimensional audit of the Official Gazette parsing and indexing architecture.
                     </p>
+
+                    <div style={{ borderTop: '2px dashed #777', paddingTop: '12px', marginTop: '20px', marginBottom: '12px' }}>
+                      <strong style={{ display: 'block', marginBottom: '10px', textTransform: 'uppercase', color: 'var(--win-blue)', fontFamily: 'monospace' }}>
+                        4. Index of Auditing Appendix Materials &amp; Logs
+                      </strong>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '13px' }}>
+                        <div style={{ background: '#fff', padding: '8px', borderLeft: '3px solid var(--win-blue)' }}>
+                          <strong style={{ color: '#000' }}>📄 Gemini Chat Logs.pdf</strong>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#333' }}>
+                            <strong>Overview:</strong> This file contains the complete transcripts of your interactions with the Gemini AI assistant from January to February 2026. It covers the entire conceptual and strategic lifecycle of the project, including early troubleshooting for the activation card portal, strategies for scraping the Lebanese Official Gazette, deciding on the technical stack, selecting AI models, and brainstorming UI/UX architectures.
+                          </p>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#555', fontStyle: 'italic' }}>
+                            <strong>Critical Point:</strong> This document captures the Naming Conversation (February 11), where both technical and humanities discourses failed to provide a vocabulary for "a citizen doing what the government should have done". It also documents the architecture decisions, specifically the recommendation to use Cohere Multilingual V3 and the decision to implement a Universal Citizen Agency design rather than a tiered access model.
+                          </p>
+                        </div>
+
+                        <div style={{ background: '#fff', padding: '8px', borderLeft: '3px solid var(--win-blue)' }}>
+                          <strong style={{ color: '#000' }}>📄 Investigating Search Data Mismatch.md</strong>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#333' }}>
+                            <strong>Overview:</strong> An IDE cascade log from March 21, 2026, triggered when you noticed that search queries copied directly from the Gazette decrees were failing to return results.
+                          </p>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#555', fontStyle: 'italic' }}>
+                            <strong>Critical Point:</strong> This file is the primary evidence for the Search Architecture Mismatch and the Cohere 402 Billing Wall. It reveals that the system's data architecture and search models had quietly diverged, querying a non-existent similarity column and returning empty arrays while appearing completely functional. It directly demonstrates Criterion 1 (Opacity and Accountability): the agentic system failed silently while performing normalcy, making the malfunction structurally undetectable until a deep investigation was forced.
+                          </p>
+                        </div>
+
+                        <div style={{ background: '#fff', padding: '8px', borderLeft: '3px solid var(--win-blue)' }}>
+                          <strong style={{ color: '#000' }}>📄 Getting La Gazette Running.md</strong>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#333' }}>
+                            <strong>Overview:</strong> This log spans February 18–19, 2026, and documents the process of getting the application running locally and debugging search accuracy issues.
+                          </p>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#555', fontStyle: 'italic' }}>
+                            <strong>Critical Point:</strong> It contains the "Don't code anything just think and answer" command issued on February 19 at 10:01 am. This is the clearest empirical demonstration of the oscillating method, where the researcher persona actively interrupted the AI's momentum to assert meaningful human oversight, proving that agentic systems default toward continuous execution rather than reflection.
+                          </p>
+                        </div>
+
+                        <div style={{ background: '#fff', padding: '8px', borderLeft: '3px solid var(--win-blue)' }}>
+                          <strong style={{ color: '#000' }}>📄 Debugging Search Integration.md</strong>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#333' }}>
+                            <strong>Overview:</strong> A massive IDE log documenting over 5,800 steps taken between February 2 and February 17, 2026, to debug the semantic and keyword search integration, database constraints, and API routing.
+                          </p>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#555', fontStyle: 'italic' }}>
+                            <strong>Critical Point:</strong> This file captures the "Five-Minute Backend Hang" on February 17, where the backend synchronously attempted to pull up to 100,000 records, causing a 5-minute latency without throwing any errors to the interface. It serves as a prime example of performance-layer opacity, where the system breaks in a way that looks like extreme slowness rather than a categorical failure.
+                          </p>
+                        </div>
+
+                        <div style={{ background: '#fff', padding: '8px', borderLeft: '3px solid var(--win-blue)' }}>
+                          <strong style={{ color: '#000' }}>📄 Pushing Gazette To Repository.md &amp; Pushing Specific Folders To GitHub.md</strong>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#333' }}>
+                            <strong>Overview:</strong> These logs from April 2, 2026, record the deployment phase of the project, specifically the attempts to push the finished application to a public GitHub repository.
+                          </p>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#555', fontStyle: 'italic' }}>
+                            <strong>Critical Point:</strong> These files document the "Clean Push" and the Completeness Impossibility. They show that the repository swelled to 13GB (including 4.5GB of Git history), causing 500 internal server errors and timeouts during transfer. To deploy the tool, you were forced to wipe the history and update the .gitignore to explicitly exclude the 15GB of OCR data. This means the tool built to search the Gazette does not actually contain the Gazette, highlighting the material and infrastructural ceilings of building civic tech without institutional resources.
+                          </p>
+                        </div>
+
+                        <div style={{ background: '#fff', padding: '8px', borderLeft: '3px solid var(--win-blue)' }}>
+                          <strong style={{ color: '#000' }}>📄 Creating Lebanon Data Visualization Page.md</strong>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#333' }}>
+                            <strong>Overview:</strong> An IDE log from late February 2026 documenting the creation of the "Lebanon in Numbers" data visualization page, transforming socioeconomic, legal, digital, and ecological data into interactive charts (Recharts) and dashboards.
+                          </p>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#555', fontStyle: 'italic' }}>
+                            <strong>Critical Point:</strong> It operationalizes the Universal Citizen Agency decision by building out the high-end intelligence interfaces (treemaps, radar charts, multi-layered maps) and making them accessible to all users, cementing the assumption that "citizens are capable analysts".
+                          </p>
+                        </div>
+
+                        <div style={{ background: '#fff', padding: '8px', borderLeft: '3px solid var(--win-blue)' }}>
+                          <strong style={{ color: '#000' }}>📄 Launching Local Host_2.md &amp; Running Local Gazette.md</strong>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#333' }}>
+                            <strong>Overview:</strong> Logs from late February to mid-March 2026 detailing the day-to-day commands, environment troubleshooting, and task tracking required to launch the Next.js frontend and FastAPI backend locally.
+                          </p>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#555', fontStyle: 'italic' }}>
+                            <strong>Critical Point:</strong> These logs reveal the continuous, granular frictions of agentic development, such as recurring database connection issues (Supabase URL failures), port conflicts, and hydration errors. They demonstrate the constant negotiation and labor required to maintain the local infrastructure supporting the build.
+                          </p>
+                        </div>
+
+                        <div style={{ background: '#fff', padding: '8px', borderLeft: '3px solid var(--win-blue)' }}>
+                          <strong style={{ color: '#000' }}>📄 cool now let_s focus on the year 2019 only with this range 8.md</strong>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#333' }}>
+                            <strong>Overview:</strong> A very brief log from February 4, 2026, documenting a targeted scraping task for the year 2019, narrowing focus to issue IDs 8837 to 8763.
+                          </p>
+                          <p style={{ margin: '4px 0', fontSize: '12px', color: '#555', fontStyle: 'italic' }}>
+                            <strong>Critical Point:</strong> It showcases the manual range-setting workaround needed to bypass the Official Gazette portal's anti-scraping architecture. By explicitly giving the AI a targeted ID range, you grounded the scraper's blind loop in known parameters to systematically extract the hidden PNG files.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
 
                     <div style={{ borderTop: '2px dashed #777', paddingTop: '12px', marginTop: '20px', textAlign: 'center', fontSize: '11px', color: '#555' }}>
                       Gazette Audit Terminal v1.0.0 · All Rights Reserved
