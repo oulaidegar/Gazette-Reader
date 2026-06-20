@@ -1854,6 +1854,75 @@ function App() {
                       </div>
                     </div>
                   )}
+
+                  {activePillarIndex === 3 && (
+                    <div className="outset-panel" style={{ marginTop: '12px', padding: '12px', background: '#f6f6f6', border: '2px solid var(--win-dark-gray)' }}>
+                      <h4 style={{ color: 'var(--win-blue)', fontWeight: 'bold', fontSize: '12px', borderBottom: '1px solid #999', paddingBottom: '4px', marginBottom: '8px', textTransform: 'uppercase', fontFamily: '"Courier New", monospace' }}>
+                        ⚖️ Empirical Instantiations & Friction Logs (Pillar 4 Auditing Map)
+                      </h4>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>1. The Active Contradiction (Technical Friction as Policy)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> January 16, 2026, at 18:02 (Proxy chain from January 8)
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToChatStep(2)}
+                            >
+                              Gemini Chat Logs.pdf (Step 2)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            A 2021 law mandates free digital access to official state documents, yet the portal gates access behind physical activation cards (with no international shipping) and returns "incorrect" errors. This technical friction actively enforces data hoarding, exposing a massive divide between legal transparency decrees and reality.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>2. The Double Enclosure (The Data Extraction Layer)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> February 2, 2026, at 14:17
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToChatStep(20)}
+                            >
+                              Gemini Chat Logs.pdf (Step 20)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            The state chose to serve the Gazette as unsearchable individual PNG images via a custom JavaScript viewer to prevent bulk copying. Extracting this required writing a "blind loop" script incorporating User-Agent spoofing and randomized jitter delays, proving that prying public law open demands heavy computational labor.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>3. The Completeness Impossibility (The Clean Push)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> April 2, 2026, at 10:58:45
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToCascadeStep('e5432998-2d3d-4e37-b6cc-9ef1855d4194', 67)}
+                            >
+                              Pushing Specific Folders To GitHub.md (Step 67)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            The state's data hoarding was reproduced in the tool's own deployment: the raw OCR output had to be completely deleted from Git to bypass free-tier size limits. This illustrates the hard ceiling of mitigating information asymmetry, as civic utilities remain architecturally incomplete without institutional capital.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
