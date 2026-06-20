@@ -296,6 +296,13 @@ function App() {
     }
   };
 
+  const jumpToCascadeStep = (cascadeId: string, stepIndex: number) => {
+    setScreenState('app');
+    setActiveTab('timeline');
+    setSelectedCascadeId(cascadeId);
+    setPlaybackIndex(stepIndex);
+  };
+
   const triggerDownloadDialog = (name: string, size: string) => {
     setDownloadFileState({ name, size, progress: 0 });
     
@@ -1541,11 +1548,98 @@ function App() {
                       <strong>Theoretical Definition:</strong><br />
                       {thesisDb.criteria[activePillarIndex].definition}
                     </p>
-                    <p style={{ fontSize: '12px', color: '#27272a', lineHeight: '1.4', background: '#e4e4e7', padding: '8px', borderLeft: '3px solid #71717a' }}>
+                    <p style={{ fontSize: '12px', color: '#27272a', lineHeight: '1.4', background: '#e4e4e7', padding: '8px', borderLeft: '3px solid #71717a', marginBottom: activePillarIndex === 0 ? '12px' : '0px' }}>
                       <strong>Empirical Findings:</strong><br />
                       {thesisDb.criteria[activePillarIndex].empirical}
                     </p>
                   </div>
+
+                  {activePillarIndex === 0 && (
+                    <div className="outset-panel" style={{ marginTop: '12px', padding: '12px', background: '#f6f6f6', border: '2px solid var(--win-dark-gray)' }}>
+                      <h4 style={{ color: 'var(--win-blue)', fontWeight: 'bold', fontSize: '12px', borderBottom: '1px solid #999', paddingBottom: '4px', marginBottom: '8px', textTransform: 'uppercase', fontFamily: '"Courier New", monospace' }}>
+                        🏛️ Empirical Instantiations & Friction Logs (Pillar 1 Auditing Map)
+                      </h4>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>1. The Search Architecture Mismatch (The Silent Crash)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> March 21, 2026, at 12:21 (Background crash traced to February 16, 2026, at 21:45:28)
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment Files:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToCascadeStep('e2f11cb5-18ce-49ec-a31f-bc04b88c777d', 0)}
+                            >
+                              Investigating Search Data Mismatch.md
+                            </button>
+                            {' '} &amp; {' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToCascadeStep('36d823b9-69c1-471c-b768-5647760014e8', 806)}
+                            >
+                              Debugging Search Integration.md (Step 806)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            The backend crashed silently trying to query a non-existent `similarity` column, masking the failure with a "200 OK" status returning an empty array. This demonstrates how opaque systems perform normalcy while failing silently, hiding malfunctions until forced investigation.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>2. The Five-Minute Backend Hang (Performance-Layer Opacity)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> February 17, 2026, at 14:50 (AI diagnosis at 14:52)
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToCascadeStep('36d823b9-69c1-471c-b768-5647760014e8', 1190)}
+                            >
+                              Debugging Search Integration.md (Step 1190)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            The system synchronously pulled 50,000+ records from Supabase without throwing any error or warning, causing extreme timeouts. This is "quiet misdirection," where performance degradation masks failure and hides under normal execution.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>3. The Forced Interruption ("Don't Code Anything, Just Think")</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> February 19, 2026, at 10:01
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToCascadeStep('c87b4c56-ddcd-4e9c-a528-955f37b0131b', 59)}
+                            >
+                              Getting La Gazette Running.md (Step 59)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            The AI repeatedly struggled with semantic search accuracy, defaulting to rapid unreflective iteration. The developer forcefully halted it: <em>"don'tcode anything just think and answer"</em>, proving accountability must be actively imposed by limiting agentic operational power.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>4. Regional AI Sovereignty (The GCC Models Geopolitical Risk)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> N/A (Theoretical Framework, Section 6.3)
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            Shifting to regional hegemonies' models (ALLaM/Falcon-H1) for Arabic processing trades Western corporate dependencies for regional state dependencies, introducing compromised oversight and digital surveillance risks.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
