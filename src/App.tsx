@@ -303,6 +303,12 @@ function App() {
     setPlaybackIndex(stepIndex);
   };
 
+  const jumpToChatStep = (stepIndex: number) => {
+    setScreenState('app');
+    setActiveTab('gemini_chat');
+    setGeminiChatVersion(stepIndex);
+  };
+
   const triggerDownloadDialog = (name: string, size: string) => {
     setDownloadFileState({ name, size, progress: 0 });
     
@@ -1635,6 +1641,95 @@ function App() {
                           </div>
                           <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
                             Shifting to regional hegemonies' models (ALLaM/Falcon-H1) for Arabic processing trades Western corporate dependencies for regional state dependencies, introducing compromised oversight and digital surveillance risks.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {activePillarIndex === 1 && (
+                    <div className="outset-panel" style={{ marginTop: '12px', padding: '12px', background: '#f6f6f6', border: '2px solid var(--win-dark-gray)' }}>
+                      <h4 style={{ color: 'var(--win-blue)', fontWeight: 'bold', fontSize: '12px', borderBottom: '1px solid #999', paddingBottom: '4px', marginBottom: '8px', textTransform: 'uppercase', fontFamily: '"Courier New", monospace' }}>
+                        🗣️ Empirical Instantiations & Friction Logs (Pillar 2 Auditing Map)
+                      </h4>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>1. The OCR Pipeline and Arabic Ligatures (Linguistic Opacity)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> February 6, 2026, at 10:56:33
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToChatStep(25)}
+                            >
+                              Gemini Chat Logs.pdf (Step 25)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            Standard open-source OCR tools often fail on connected Arabic ligatures and dense legal layouts, imposing a "linguistic tax" on non-Western contexts. Lack of native Arabic fluency leaves legal terminology validation structurally opaque.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>2. The Cohere Decision (Outsourcing Linguistic Sovereignty)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> February 6, 2026, at 11:20:57
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToChatStep(30)}
+                            >
+                              Gemini Chat Logs.pdf (Step 30)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            Standard English-trained models fail to capture root-based Arabic legal register morphology. The project was forced to outsource its linguistic sovereignty to Cohere Multilingual v3, tying linguistic survival to a Western corporate provider.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>3. "The Arabic Problem" and Normalization Requirements</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> February 6, 2026, at 11:20:57
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToChatStep(30)}
+                            >
+                              Gemini Chat Logs.pdf (Step 30 - "The Arabic Problem")
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            The AI flagged "The Arabic Problem", detailing that the backend pipeline must execute manual normalization (e.g. unifying Alef, stripping Tashkeel) before embedding. This highlights the custom engineering overhead needed to make Western tools process Arabic.
+                          </p>
+                        </div>
+
+                        <div style={{ fontSize: '12px', color: '#111', lineHeight: '1.4', borderTop: '1px dotted #888', paddingTop: '8px' }}>
+                          <strong style={{ color: '#000', fontSize: '12.5px' }}>4. The Cohere 402 Billing Cascade (Semantic Degradation)</strong>
+                          <div style={{ fontSize: '11px', color: '#555', margin: '2px 0 4px 0' }}>
+                            <strong>Date/Time:</strong> March 21, 2026, at 15:52:52
+                          </div>
+                          <div style={{ fontSize: '11.5px', margin: '4px 0' }}>
+                            <strong>Audited Moment File:</strong>{' '}
+                            <button 
+                              className="gopher-link" 
+                              style={{ display: 'inline', background: 'none', border: 'none', padding: 0, textDecoration: 'underline', color: 'var(--win-blue)', cursor: 'pointer', font: 'inherit', fontWeight: 'bold' }}
+                              onClick={() => jumpToCascadeStep('e2f11cb5-18ce-49ec-a31f-bc04b88c777d', 66)}
+                            >
+                              Investigating Search Data Mismatch.md (Step 66)
+                            </button>
+                          </div>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '11.5px' }}>
+                            When Cohere billing failed, the search silently fell back to keyword matching. In Arabic, keyword match behaves significantly worse due to root morphologic variants, demonstrating that Global South linguistic sovereignty depends directly on corporate billing.
                           </p>
                         </div>
                       </div>
