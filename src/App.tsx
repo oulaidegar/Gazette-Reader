@@ -589,6 +589,7 @@ function App() {
   // Custom retro popup modals
   const [showAboutDialog, setShowAboutDialog] = useState<boolean>(false);
   const [showManifestoDialog, setShowManifestoDialog] = useState<boolean>(false);
+  const [showAnalysisDialog, setShowAnalysisDialog] = useState<boolean>(false);
   const [showSearchDialog, setShowSearchDialog] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [samplePage, setSamplePage] = useState<number>(1);
@@ -798,6 +799,67 @@ Right to Access Information Law (Undated): The text cites the first paragraph of
         });
       }
     });
+
+    const resultsDraftText = `
+Results/Analysis - The return of the Methodology
+5.1 The state’s Hostile Interface
+In principle, the Official Lebanese Gazette should be accessible to any Lebanese Citizen online. In practice, accessing it from Amsterdam requires a physical card available at a select few locations in Lebanon: the Prime Minister’s office, the Official Gazette Department, the offices of the Lebanese Electronic Book House, and Liban Post. There is no international purchase mechanism, no digital delivery, and no alternative for citizens living abroad.
+This thesis begins with that gap, written from Amsterdam by a French-Lebanese student who could not access his own country’s primary and definitive legal archive without arranging a proxy in Beirut to obtain the card on his behalf. That arrangement, of phone calls, WhatsApp thread, family contact, the physical card crossing the bureaucratic distance the digital system refused to bridge, is not personal context; within the context of this thesis, it is the first data point.
+The digital transition of the Gazette in 2005 was initiated on the Prime Minister’s official website, which began publishing its issues. From 2005, the Official Lebanese Gazette was free of charge and accessible to all, until February 23rd, 2018, when Decree 2420 was passed, the first article of which stipulated: “The subscription fee for the electronic Official Gazette is set at 550,000 Lebanese pounds only.” and effectively ending free electronic publishing. With no direct international means of paying for the Gazette, the reversal to a paid subscription did not solve the access problem for the diaspora and citizens; it ignored it entirely.
+Contextually, the words ‘electronic’ and ‘digital’ are doing false work, with the implicit and explicit promise of the online, meaning available from anywhere, with virtually no geographical friction.
+Lebanon has a diaspora-to-domestic population ratio of roughly 2.7x, with around 5.8 million domestic residents compared to 15.4 million in the diaspora. Despite a 13.4% drop in remittances from 2023 to 2024, remittances still accounted for 17.7% of GDP, making it the 37th-largest recipient worldwide. This constituency is structurally excluded from the state’s primary legal publication by a physical activation card and a format which directly contradicts Article 18 of the right to Access to Information law which explicitly states that: “access to administrative documents is free of charge at their location, unless physical preservation of the documents prevents it.” if published and printed documents can be accessed free of charge at their locations, who is to impose a subscription when laws and decrees are published without printing costs?
+In order to procure myself an Activation card, I resorted to contacting my Uncle, who lives in Beirut, during a phone call on the 8th of January 2026, I explained the situation and what I needed, after re-specifying that I needed an activation card for the digital version of the Gazette on the 12th of January, my uncle having gone down to the Liban Post office early in the morning, and promptly sent me a voice message explaining, that there is no electronic version, but that I could order an issue and within 48 hours I could have access, it was unclear whether this was the subscription or whether it was an activation card, or the most recent issue.
+On the 14th of January, at 11:30 in the morning, I sent him the link to Liban Post’s page regarding the procurement of the activation card, along with a message stating that I needed access to the digital portal and including the portal link. My uncle then promptly called me back, though I do not remember the exact contents of the conversation. He was trying to mitigate misinformation and make sure that when he arrived at the office, he had the correct information. That night at 23:05 pm, I prompted Gemini on how I could get online access to the Lebanese Gazette. Unfortunately, Gemini did not provide much useful information on the process of procuring the activation card, simply recommending that I go to the PCM office to get a prepaid activation card or to authorized distributors such as Dar-Al-Kitab-Al-Electroni. Additionally, Gemini stated that the code on the card could be used to activate the account. I then offered those two additional locations as an alternate means.
+Following that exchange, on the 15th of January, my uncle called Dar Al-Kitab Al-Elektroni to inquire whether going to them would result in obtaining an access card, to which they replied that they go through Liban Post and that the total cost would be 10 million 300 thousand Lebanese pounds. Following that interaction, I provided my uncle with my email and a front and back picture of my Lebanese ID - something I felt rather uncomfortable doing, as it pertained to my identity. My uncle, having gone to try and get the activation card once again, was told by the clerk that it was not possible due to a bug in the system, or the system being down that day, and was forced to go again the next day.
+On the 16th of January, at 11:54 am, my uncle sent me pictures of the activation card, along with a voice message in which he said he had stood in line since 8h30 in the morning. He also said that on the card was the card number and the password.
+That day, I tried multiple times to log in to my account using the information on the card, but to no avail; the portal refused me entry. Having exhausted my own resources, I turned to Gemini at 18:02 pm, and asked it why, despite having the card and inputting the credentials, the portal returned ‘incorrect’. The LLM’s troubleshooting response cataloged the PCM portal’s recurring problems: Character confusion between 0 and O in the activation code, point-of-sale errors at Liban Post, Database sync delays, and spacing. It offered a step-by-step registration process and, finally, suggested I call the technical support hotline at the Grand Serail in the Prime Minister's office.
+On the 19th of January, I reached out to the Gazette via WhatsApp having figured out the card required an extra activation, I provided them a picture of my card, my email address, and on the 20th of January, the Gazette had sent me both my new username and password over WhatsApp, I could finally access my account.
+This was the first instance of the oscillating method's application. From a vibecoder’s reading, an access error was handled with a technical workaround that leveraged the LLM to proceed to the next step. From the researcher’s reading, this was a system that had failed at every layer, from the portal to the card, the activation, the information, the hotline, and the usage of 3rd party tools for communication with official government bodies. The entire process revealed the proxy chain, the social access barriers, the invisibility of the obstruction from outside, and the dependence on others. Wherein a service which was initially free, promised digital access to public law, available online at all times, instead was met with a subscription gated by a physical card, and documented recurring failure. The gap between promise and reality precedes the AI intervention entirely. Within the scope of what this project sought out to address, the information asymmetry was not created by inadequate digitization; instead, it was reproduced through the process of digitization and maintenance, with new layers of obstruction added to existing ones. The service is engineered to exclude, not through a deliberately malicious design, but through the cumulative effects of those decisions or indecisions, which function as an exclusion mechanism.
+
+5.2 The Blind Loop: Labor, Anti-scraping Architecture, and the cost of Access.
+After having been granted access to the online Gazette on January 20th 2026, I peered over the service in order to form a better understanding and have a more complete overview of the platform. Through visiting the various pages of the site, I came to the conclusion that access to view is not access to use. The archive part of the site, exists as individual PNG images, served page by page through a JavaScript viewer, but in order to build a searchable tool, the raw files are required. Additionally, the Official Lebanese Gazette does not provide an API, nor does it provide a bulk export feature, the exception to the rule being the current year being served, for which a full PDF download of the issue is available, any issue predating the current year is sequestered in individual scanned images. In doing so, the state provides the user access to read, but no access to build.
+For the purpose of this project, everything that follows in the build depends on solving the accessibility problem, with the data pipeline being the foundation, and the issues of the dataset being the walls. If the data pipeline resulted in the inability to extract the issues of our dataset, nothing else could be built.
+Once access to the online service was gained, and information on how the service broadly worked was acquired, I immediately queried the LLM with full context of the project and the foreseeable issues I had gathered when looking through the site. The LLM provide a strategy to tackle these issues, and provided a ‘proposed folder structure’ alongside a code snippet. On the 26th of January, at 13:31 pm, I renewed my query, focusing exclusively on scraping with no context, aside from the website undergoing the scraping, and a request for the correct dates. Having both the context of what was to be scraped, and a single requirement, the LLM fullfilled its duty providing a foundational Python script, using the BeautifulSoup, requests, and re libraries. The scraper did not function properly, and at 13:37 pm, I provided a specific URL format “https://jo.pcm.gov.lb/allimages.php?issueId=9236” to which the LLM identified that hte site uses a database-driven system with a unique IssueId, it then proceeded to revise the code to scrape the main archive page to map dates to the issueId and proceed to construct direct download links. It also noted that the URL implied a ‘gallery view’ of images and advised looking for direct PDF links. These initial forrays where important in getting accustomed both to the capability’s and context of the LLM.
+During this initial foray, and after some reflection, I felt as though, my own context may have been detrimental to the LLM’s capability’s, instead I queried it on its knowledge of the Gazette, without any technical operations to be effectuated, it had to be succinct in its answer and summarize the main points. This was to be important in order to establish common understanding and mutual trust between the vibe-coder, and the LLM.
+On the 2nd of February 2026, we began the process of scraping, the starting point was building a scraper to download all the issues in a year, in the following prompt, I provided the URL related to the last issue of 2025, this was important because it was also the last issue of our dataset. In the following prompt and in attempting to find out more about how to exploit the site, I found that by clicking “print” it generated a URL containing ‘printall-1.php’ this was a major breakthrough at the time, with the LLM recognizing it as a massive shortcut which by-passed the need to manually stitch the images together. In addition, a range ticker and a sleep timer, and a realistic user-Agent headers to mimic human browsing and prevent the server from blocking the script.
+At 12:42, realising the sheer amount of data that was to be downloaded, I asked the LLM if the downloads could be immediately placed into dedicated Google Drive folder, for a moment there was confusion on my side, as the LLM provided a complex script requiring a Google Drive API, credentials.json and OAuth setup, this seemed unnecessary, and predatory despite the promise of 300$ of free API credits for new users. Having mounted a drive in collab during our first semester, I asked Gemini why not use collab directly? This was in my view a first principles way of thinking. Gemini answered favorably agreeing that Colab was easier, removing the need for API credentials, it also added a ‘Why Colab is better for this project:’ which frustrated me, primarily because had I not been cautious and suspicious I may have adhered to previous plan, and resulted in further entanglement with the company’s products which where unnecessary in the first place.
+The narrow aspect of my dataset was such, that it occurred to me during this process to note down manually the first and last issue numbers of the corresponding years of my dataset (2014-2025) this was another small but no-less important breakthrough, as it provided all three parties with a range, and grounding on which to operate from.
+Between, 12:55pm and 13:33pm, a back and forth continued, the initial issue after having provided the range, was that the script only downloaded the first image of the PDF this was due to the site’s ‘print’ endpoint only loading the current page, and leaving the rest to be lazy-loaded via Javascript as individual PNG images. This became increasingly frustrating, as each foray into the site and each new version of the scraper seemed to be getting closer and further in the same span. Additionally, it felt as though my incompetencies as a developper, where producing incompetence in the LLM, I was under the impression that my inadequacies where producing further inadequacies. In feeling technically illegitimate, I proceeded to research further into the console, ultimately finding that the Gazette was serving pages as direct image files following a clear URL pattern.
+As rewarding as the breakthrough was, the site’s complicated nature, returned only a fragment the complete issue, returning 8 pages for the first issue, and 4 for the second. In turn the LLM provided some extra guardrails: size validation, intra-page ticker, connection stability, and renamed the scraper to “Smart Multi-page scraper” it felt quite odd to repeatedly read adjectives such as those, why smart? It felt as though the conversation and the capabilities had yielded nothing, the LLM resorted to marketing.
+Finally, going back into and digging further into the console, I found that I could see all the links to the PNG’s. The scraper was still operating from Google Collab, and so to was the script, after going through a few issues with runtime, and the sheer volume of data needing to be collected, I decided to revert to VScode. This shift, from Collab, back to VScode, despite VScode being owned by Microsoft, was equally significant, it had mapped the limits of cloud computing, additionally, I felt as though the process had been so strenuous to understand how to overcome these bottlenecks, and the recurring issues, made the process of dialogue with a LLM feel fragile, and incomplete.
+Finally, at 14:19 pm, after receiving the VScode formatted script, when trying to install the dependencies the command ‘pip’ was not found, due to it being tied with an older version of Python, when running Pip3, the ModuleNotFoundError could not find the ‘requests’ module, there had been a mismatch in Python environments with the packages being installed in a different environment or path. The AI finally returned the exact commands to install the packages directly into the Homebrew Python path.
+The entire process, amounted to just over two hours of back and forth.
+The Government portal’s ambivalence in how it serves and procures access to current versus past year issues, displays not a technical limitation but a deliberate architectural choice with a specific effect: it makes the archive viewable but not processable. Issues pertaining to the current year are available as a complete PDF single issue download, with the option to sift page by page. Issues past, are on the other hand only available to the Citizen, page by page. The developer cannot access it programmatically without significant reverse-engineering efforts, this process creates a distinction between read access and build access, drawing a clear line between consumption and agency. This echoes strongly with what Novelli, Taddeo, and Floridi (2023) would identify as access without accountability. The Gazette’s current architecture, enables citizens to see the information and verify it exists, but cannot interrogate it, constrain its gatekeeping, or exercise the oversight that transforms raw access into meaningful democratic capacity. In sum, what the state calls a digital archive, is simply an interface that permits reading but prevents building.
+The process of scraping, the labor cost associated with that process, constitute a finding, the various iterations to make the process work, required prior knowledge of web scraping, familiarity with browser developer tools, the ability to read and debug Python, foresight, access to a coding AI assistant, time, a functioning laptop, and a stable internet connection.
+The hype/inflammatory discourse, surrounding AI’s capacity to lower barriers was tested directly: the barrier was indeed lowered, a non-developer could not have built this scraper unaided before frontier AI, conversely, the barrier’s lowering does not dissolve it, requiring substantial technical literary, time, and access to corporate AI infrastructure, and common sense.
+The so-called ‘democratisation’ is partial, conditional and resource-dependent, in order to access public legal documents, I had to disguise my identity using ‘user-agent-spoofing’ mimic human behavior utilising jitter delays, and reverse engineer a system designed to prevent my actions. The associated labor costs of that afternoon, where not incidental, they are the metric by which the AI hype discourse’s claims about AI and access should be measured.
+BEFORE TRANSITIONING I NEED TO INCLUDE THE 4 DAYS SPENT DOWNLOADING THE ISSUES AND IMAGES.
+The scraper having worked, and the files being stored in their respective years folder as full stitched issues, constituted a dataset spanning over 10 years, and amounting to 15 GB’s of unsearchable material, the OCR pipeline, embeddings, database architecture, search infrastructure, and UI/UX still needed to be built. With each of those decisions carrying their own dependencies and constraints. The data had been liberated, but remained unlegible, the choices made in that process, would determine whose conception of Agency the tool would ultimately serve.
+`.toLowerCase();
+
+    if (
+      'results/analysis'.includes(query) ||
+      'results/analysis - the return of the methodology'.includes(query) ||
+      resultsDraftText.includes(query)
+    ) {
+      const idx = resultsDraftText.indexOf(query);
+      const start = Math.max(0, idx - 45);
+      const end = Math.min(resultsDraftText.length, idx + 55);
+      const snippetText = idx !== -1
+        ? `...${resultsDraftText.substring(start, end).replace(/\s+/g, ' ').trim()}...`
+        : 'Results/Analysis - The return of the Methodology';
+      results.push({
+        category: 'scraper',
+        title: 'Draft: Results/Analysis - The Return of the Methodology',
+        snippet: snippetText,
+        action: () => {
+          setScreenState('app');
+          setActiveTab('scraper');
+          setShowAnalysisDialog(true);
+          setShowSearchDialog(false);
+        }
+      });
+    }
 
     // 4. Gemini Chat
     geminiChatConvs.forEach((conv, index) => {
@@ -3448,6 +3510,32 @@ Right to Access Information Law (Undated): The text cites the first paragraph of
               })}
             </div>
 
+            <h2 className="section-title" style={{ marginTop: '8px' }}>Results &amp; Analysis Draft</h2>
+            <div className="outset-panel" style={{ padding: '6px', background: 'var(--win-light-gray)', display: 'flex', flexDirection: 'column', gap: '6px', border: '1px solid var(--win-dark-gray)' }}>
+              <p style={{ fontSize: '11px', margin: 0, color: '#000', fontWeight: 'bold', lineHeight: '1.3' }}>
+                Results/Analysis - The return of the Methodology
+              </p>
+              <p style={{ fontSize: '10.5px', margin: 0, color: '#555', lineHeight: '1.3' }}>
+                Raw draft analyzing the state's hostile interface, the proxy chain, and the labor realities of the scraping pipeline.
+              </p>
+              <button 
+                className="win-button" 
+                onClick={() => setShowAnalysisDialog(true)}
+                style={{ 
+                  padding: '4px', 
+                  fontSize: '11px', 
+                  fontWeight: 'bold', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  gap: '4px',
+                  width: '100%'
+                }}
+              >
+                <span>📖</span> Read Full Draft (Sec 5.1 &amp; 5.2)
+              </button>
+            </div>
+
             <h2 className="section-title" style={{ marginTop: '8px' }}>Scraper Auditing Stats</h2>
             <div style={{ padding: '6px', background: 'var(--win-light-gray)', border: '1px solid var(--win-dark-gray)', display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '11px' }}>
               <p>Total Interactions: <strong>{totalScraperSteps} steps</strong></p>
@@ -4341,6 +4429,140 @@ Right to Access Information Law (Undated): The text cites the first paragraph of
             <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '8px', background: 'var(--win-gray)', borderTop: '1px solid var(--win-dark-gray)' }}>
               <button className="win-button" onClick={() => setShowAboutDialog(false)} style={{ width: '80px' }}>
                 OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* RESULTS & ANALYSIS DRAFT DIALOG MODAL */}
+      {showAnalysisDialog && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0,0,0,0.5)',
+          zIndex: 1000,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <div className="outset-panel" style={{ width: '750px', maxWidth: '95vw', padding: '2px' }}>
+            <div className="win-title-bar">
+              <span>Results/Analysis: The return of the Methodology - results_draft.md</span>
+              <button className="win-sys-btn" onClick={() => setShowAnalysisDialog(false)}>X</button>
+            </div>
+            <div style={{ padding: '20px', maxHeight: '500px', overflowY: 'auto', background: '#fbfbf8', color: '#000', fontFamily: 'var(--font-sans)', fontSize: '13.5px', lineHeight: '1.6' }}>
+              <h2 style={{ fontSize: '18px', fontWeight: 'bold', borderBottom: '2px solid var(--win-blue)', paddingBottom: '6px', marginBottom: '16px', color: 'var(--win-blue)' }}>
+                Results/Analysis - The return of the Methodology
+              </h2>
+              
+              <h3 style={{ fontSize: '14.5px', fontWeight: 'bold', marginTop: '16px', marginBottom: '8px', color: '#111', borderBottom: '1px solid #ddd', paddingBottom: '4px' }}>
+                5.1 The state’s Hostile Interface
+              </h3>
+              <p style={{ marginBottom: '12px' }}>
+                In principle, the Official Lebanese Gazette should be accessible to any Lebanese Citizen online. In practice, accessing it from Amsterdam requires a physical card available at a select few locations in Lebanon: the Prime Minister’s office, the Official Gazette Department, the offices of the Lebanese Electronic Book House, and Liban Post. There is no international purchase mechanism, no digital delivery, and no alternative for citizens living abroad.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                This thesis begins with that gap, written from Amsterdam by a French-Lebanese student who could not access his own country’s primary and definitive legal archive without arranging a proxy in Beirut to obtain the card on his behalf. That arrangement, of phone calls, WhatsApp thread, family contact, the physical card crossing the bureaucratic distance the digital system refused to bridge, is not personal context; within the context of this thesis, it is the first data point.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                The digital transition of the Gazette in 2005 was initiated on the Prime Minister’s official website, which began publishing its issues. From 2005, the Official Lebanese Gazette was free of charge and accessible to all, until February 23rd, 2018, when Decree 2420 was passed, the first article of which stipulated: “The subscription fee for the electronic Official Gazette is set at 550,000 Lebanese pounds only.” and effectively ending free electronic publishing. With no direct international means of paying for the Gazette, the reversal to a paid subscription did not solve the access problem for the diaspora and citizens; it ignored it entirely.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                Contextually, the words ‘electronic’ and ‘digital’ are doing false work, with the implicit and explicit promise of the online, meaning available from anywhere, with virtually no geographical friction.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                Lebanon has a diaspora-to-domestic population ratio of roughly 2.7x, with around 5.8 million domestic residents compared to 15.4 million in the diaspora. Despite a 13.4% drop in remittances from 2023 to 2024, remittances still accounted for 17.7% of GDP, making it the 37th-largest recipient worldwide. This constituency is structurally excluded from the state’s primary legal publication by a physical activation card and a format which directly contradicts Article 18 of the right to Access to Information law which explicitly states that: <em>“access to administrative documents is free of charge at their location, unless physical preservation of the documents prevents it.”</em> if published and printed documents can be accessed free of charge at their locations, who is to impose a subscription when laws and decrees are published without printing costs?
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                In order to procure myself an Activation card, I resorted to contacting my Uncle, who lives in Beirut, during a phone call on the 8th of January 2026, I explained the situation and what I needed, after re-specifying that I needed an activation card for the digital version of the Gazette on the 12th of January, my uncle having gone down to the Liban Post office early in the morning, and promptly sent me a voice message explaining, that there is no electronic version, but that I could order an issue and within 48 hours I could have access, it was unclear whether this was the subscription or whether it was an activation card, or the most recent issue.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                On the 14th of January, at 11:30 in the morning, I sent him the link to Liban Post’s page regarding the procurement of the activation card, along with a message stating that I needed access to the digital portal and including the portal link. My uncle then promptly called me back, though I do not remember the exact contents of the conversation. He was trying to mitigate misinformation and make sure that when he arrived at the office, he had the correct information. That night at 23:05 pm, I prompted Gemini on how I could get online access to the Lebanese Gazette. Unfortunately, Gemini did not provide much useful information on the process of procuring the activation card, simply recommending that I go to the PCM office to get a prepaid activation card or to authorized distributors such as Dar-Al-Kitab-Al-Electroni. Additionally, Gemini stated that the code on the card could be used to activate the account. I then offered those two additional locations as an alternate means.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                Following that exchange, on the 15th of January, my uncle called Dar Al-Kitab Al-Elektroni to inquire whether going to them would result in obtaining an access card, to which they replied that they go through Liban Post and that the total cost would be 10 million 300 thousand Lebanese pounds. Following that interaction, I provided my uncle with my email and a front and back picture of my Lebanese ID - something I felt rather uncomfortable doing, as it pertained to my identity. My uncle, having gone to try and get the activation card once again, was told by the clerk that it was not possible due to a bug in the system, or the system being down that day, and was forced to go again the next day.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                On the 16th of January, at 11:54 am, my uncle sent me pictures of the activation card, along with a voice message in which he said he had stood in line since 8h30 in the morning. He also said that on the card was the card number and the password.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                That day, I tried multiple times to log in to my account using the information on the card, but to no avail; the portal refused me entry. Having exhausted my own resources, I turned to Gemini at 18:02 pm, and asked it why, despite having the card and inputting the credentials, the portal returned ‘incorrect’. The LLM’s troubleshooting response cataloged the PCM portal’s recurring problems: Character confusion between 0 and O in the activation code, point-of-sale errors at Liban Post, Database sync delays, and spacing. It offered a step-by-step registration process and, finally, suggested I call the technical support hotline at the Grand Serail in the Prime Minister's office.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                On the 19th of January, I reached out to the Gazette via WhatsApp having figured out the card required an extra activation, I provided them a picture of my card, my email address, and on the 20th of January, the Gazette had sent me both my new username and password over WhatsApp, I could finally access my account.
+              </p>
+              <p style={{ marginBottom: '12px', fontStyle: 'italic', borderLeft: '3px solid var(--win-blue)', paddingLeft: '10px', background: '#f0f4f8', padding: '8px' }}>
+                This was the first instance of the oscillating method's application. From a vibecoder’s reading, an access error was handled with a technical workaround that leveraged the LLM to proceed to the next step. From the researcher’s reading, this was a system that had failed at every layer, from the portal to the card, the activation, the information, the hotline, and the usage of 3rd party tools for communication with official government bodies. The entire process revealed the proxy chain, the social access barriers, the invisibility of the obstruction from outside, and the dependence on others. Wherein a service which was initially free, promised digital access to public law, available online at all times, instead was met with a subscription gated by a physical card, and documented recurring failure. The gap between promise and reality precedes the AI intervention entirely. Within the scope of what this project sought out to address, the information asymmetry was not created by inadequate digitization; instead, it was reproduced through the process of digitization and maintenance, with new layers of obstruction added to existing ones. The service is engineered to exclude, not through a deliberately malicious design, but through the cumulative effects of those decisions or indecisions, which function as an exclusion mechanism.
+              </p>
+
+              <h3 style={{ fontSize: '14.5px', fontWeight: 'bold', marginTop: '20px', marginBottom: '8px', color: '#111', borderBottom: '1px solid #ddd', paddingBottom: '4px' }}>
+                5.2 The Blind Loop: Labor, Anti-scraping Architecture, and the cost of Access
+              </h3>
+              <p style={{ marginBottom: '12px' }}>
+                After having been granted access to the online Gazette on January 20th 2026, I peered over the service in order to form a better understanding and have a more complete overview of the platform. Through visiting the various pages of the site, I came to the conclusion that access to view is not access to use. The archive part of the site, exists as individual PNG images, served page by page through a JavaScript viewer, but in order to build a searchable tool, the raw files are required. Additionally, the Official Lebanese Gazette does not provide an API, nor does it provide a bulk export feature, the exception to the rule being the current year being served, for which a full PDF download of the issue is available, any issue predating the current year is sequestered in individual scanned images. In doing so, the state provides the user access to read, but no access to build.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                For the purpose of this project, everything that follows in the build depends on solving the accessibility problem, with the data pipeline being the foundation, and the issues of the dataset being the walls. If the data pipeline resulted in the inability to extract the issues of our dataset, nothing else could be built.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                Once access to the online service was gained, and information on how the service broadly worked was acquired, I immediately queried the LLM with full context of the project and the foreseeable issues I had gathered when looking through the site. The LLM provided a strategy to tackle these issues, and provided a ‘proposed folder structure’ alongside a code snippet. On the 26th of January, at 13:31 pm, I renewed my query, focusing exclusively on scraping with no context, aside from the website undergoing the scraping, and a request for the correct dates. Having both the context of what was to be scraped, and a single requirement, the LLM fullfilled its duty providing a foundational Python script, using the BeautifulSoup, requests, and re libraries. The scraper did not function properly, and at 13:37 pm, I provided a specific URL format “https://jo.pcm.gov.lb/allimages.php?issueId=9236” to which the LLM identified that hte site uses a database-driven system with a unique IssueId, it then proceeded to revise the code to scrape the main archive page to map dates to the issueId and proceed to construct direct download links. It also noted that the URL implied a ‘gallery view’ of images and advised looking for direct PDF links. These initial forrays where important in getting accustomed both to the capability’s and context of the LLM.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                During this initial foray, and after some reflection, I felt as though, my own context may have been detrimental to the LLM’s capability’s, instead I queried it on its knowledge of the Gazette, without any technical operations to be effectuated, it had to be succinct in its answer and summarize the main points. This was to be important in order to establish common understanding and mutual trust between the vibe-coder, and the LLM.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                On the 2nd of February 2026, we began the process of scraping, the starting point was building a scraper to download all the issues in a year, in the following prompt, I provided the URL related to the last issue of 2025, this was important because it was also the last issue of our dataset. In the following prompt and in attempting to find out more about how to exploit the site, I found that by clicking “print” it generated a URL containing ‘printall-1.php’ this was a major breakthrough at the time, with the LLM recognizing it as a massive shortcut which by-passed the need to manually stitch the images together. In addition, a range ticker and a sleep timer, and a realistic user-Agent headers to mimic human browsing and prevent the server from blocking the script.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                At 12:42, realising the sheer amount of data that was to be downloaded, I asked the LLM if the downloads could be immediately placed into dedicated Google Drive folder, for a moment there was confusion on my side, as the LLM provided a complex script requiring a Google Drive API, credentials.json and OAuth setup, this seemed unnecessary, and predatory despite the promise of 300$ of free API credits for new users. Having mounted a drive in collab during our first semester, I asked Gemini why not use collab directly? This was in my view a first principles way of thinking. Gemini answered favorably agreeing that Colab was easier, removing the need for API credentials, it also added a ‘Why Colab is better for this project:’ which frustrated me, primarily because had I not been cautious and suspicious I may have adhered to previous plan, and resulted in further entanglement with the company’s products which where unnecessary in the first place.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                The narrow aspect of my dataset was such, that it occurred to me during this process to note down manually the first and last issue numbers of the corresponding years of my dataset (2014-2025) this was another small but no-less important breakthrough, as it provided all three parties with a range, and grounding on which to operate from.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                Between, 12:55pm and 13:33pm, a back and forth continued, the initial issue after having provided the range, was that the script only downloaded the first image of the PDF this was due to the site’s ‘print’ endpoint only loading the current page, and leaving the rest to be lazy-loaded via Javascript as individual PNG images. This became increasingly frustrating, as each foray into the site and each new version of the scraper seemed to be getting closer and further in the same span. Additionally, it felt as though my incompetencies as a developper, where producing incompetence in the LLM, I was under the impression that my inadequacies where producing further inadequacies. In feeling technically illegitimate, I proceeded to research further into the console, ultimately finding that the Gazette was serving pages as direct image files following a clear URL pattern.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                As rewarding as the breakthrough was, the site’s complicated nature, returned only a fragment the complete issue, returning 8 pages for the first issue, and 4 for the second. In turn the LLM provided some extra guardrails: size validation, intra-page ticker, connection stability, and renamed the scraper to “Smart Multi-page scraper” it felt quite odd to repeatedly read adjectives such as those, why smart? It felt as though the conversation and the capabilities had yielded nothing, the LLM resorted to marketing.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                Finally, going back into and digging further into the console, I found that I could see all the links to the PNG’s. The scraper was still operating from Google Collab, and so to was the script, after going through a few issues with runtime, and the sheer volume of data needing to be collected, I decided to revert to VScode. This shift, from Collab, back to VScode, despite VScode being owned by Microsoft, was equally significant, it had mapped the limits of cloud computing, additionally, I felt as though the process had been so strenuous to understand how to overcome these bottlenecks, and the recurring issues, made the process of dialogue with a LLM feel fragile, and incomplete.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                Finally, at 14:19 pm, after receiving the VScode formatted script, when trying to install the dependencies the command ‘pip’ was not found, due to it being tied with an older version of Python, when running Pip3, the ModuleNotFoundError could not find the ‘requests’ module, there had been a mismatch in Python environments with the packages being installed in a different environment or path. The AI finally returned the exact commands to install the packages directly into the Homebrew Python path.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                The entire process, amounted to just over two hours of back and forth.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                The Government portal’s ambivalence in how it serves and procures access to current versus past year issues, displays not a technical limitation but a deliberate architectural choice with a specific effect: it makes the archive viewable but not processable. Issues pertaining to the current year are available as a complete PDF single issue download, with the option to sift page by page. Issues past, are on the other hand only available to the Citizen, page by page. The developer cannot access it programmatically without significant reverse-engineering efforts, this process creates a distinction between read access and build access, drawing a clear line between consumption and agency. This echoes strongly with what Novelli, Taddeo, and Floridi (2023) would identify as access without accountability. The Gazette’s current architecture, enables citizens to see the information and verify it exists, but cannot interrogate it, constrain its gatekeeping, or exercise the oversight that transforms raw access into meaningful democratic capacity. In sum, what the state calls a digital archive, is simply an interface that permits reading but prevents building.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                The process of scraping, the labor cost associated with that process, constitute a finding, the various iterations to make the process work, required prior knowledge of web scraping, familiarity with browser developer tools, the ability to read and debug Python, foresight, access to a coding AI assistant, time, a functioning laptop, and a stable internet connection.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                The hype/inflammatory discourse, surrounding AI’s capacity to lower barriers was tested directly: the barrier was indeed lowered, a non-developer could not have built this scraper unaided before frontier AI, conversely, the barrier’s lowering does not dissolve it, requiring substantial technical literary, time, and access to corporate AI infrastructure, and common sense.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                The so-called ‘democratisation’ is partial, conditional and resource-dependent, in order to access public legal documents, I had to disguise my identity using ‘user-agent-spoofing’ mimic human behavior utilising jitter delays, and reverse engineer a system designed to prevent my actions. The associated labor costs of that afternoon, where not incidental, they are the metric by which the AI hype discourse’s claims about AI and access should be measured.
+              </p>
+              
+              <div style={{ background: '#fff2cc', border: '1px solid #d6a300', padding: '10px', margin: '14px 0', borderRadius: '2px', fontSize: '11px', fontWeight: 'bold', color: '#7f6000', fontFamily: 'var(--font-mono)' }}>
+                ⚠️ MEMORANDUM FOR THE TRANSITION:<br />
+                BEFORE TRANSITIONING I NEED TO INCLUDE THE 4 DAYS SPENT DOWNLOADING THE ISSUES AND IMAGES.
+              </div>
+              
+              <p style={{ marginBottom: '12px' }}>
+                The scraper having worked, and the files being stored in their respective years folder as full stitched issues, constituted a dataset spanning over 10 years, and amounting to 15 GB’s of unsearchable material, the OCR pipeline, embeddings, database architecture, search infrastructure, and UI/UX still needed to be built. With each of those decisions carrying their own dependencies and constraints. The data had been liberated, but remained unlegible, the choices made in that process, would determine whose conception of Agency the tool would ultimately serve.
+              </p>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '8px', background: 'var(--win-gray)', borderTop: '1px solid var(--win-dark-gray)' }}>
+              <button className="win-button" onClick={() => setShowAnalysisDialog(false)} style={{ width: '80px' }}>
+                DISMISS
               </button>
             </div>
           </div>
