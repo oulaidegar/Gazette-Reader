@@ -2397,7 +2397,7 @@ The scraper having worked, and the files being stored in their respective years 
                           <h3 style={{ fontWeight: 'bold', fontSize: '14px', color: 'var(--win-blue)', marginBottom: '6px' }}>
                             {sec.title}
                           </h3>
-                          <p style={{ fontSize: '12.5px', lineHeight: '1.5', color: '#111' }}>
+                          <p style={{ fontSize: '12.5px', lineHeight: '1.5', color: '#111', whiteSpace: 'pre-wrap' }}>
                             {sec.text}
                           </p>
                           <div style={{ marginTop: '6px', fontSize: '11px', color: '#666' }}>
