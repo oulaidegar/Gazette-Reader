@@ -223,6 +223,27 @@ function App() {
     { name: 's43681-022-00239-4 (3).pdf', size: '761 KB' }
   ];
 
+  const thesisExternalLinks = [
+    { title: "Legal Agenda - The Electronic Official Gazette (Arabic)", url: "https://legal-agenda.com/%D8%A7%D9%84%D8%AC%D8%B1%D9%8A%D8%AF%D8%A9-%D8%A7%D9%84%D8%B1%D8%B3%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D8%A7%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A9-%D9%84%D9%82%D8%A7%D8%A1-%D8%A8%D8%AF%D9%84/" },
+    { title: "World Bank - Lebanon Protection & Digital Transformation Financing (2026)", url: "https://www.worldbank.org/en/news/press-release/2026/01/27/lebanon-world-bank-approves-us-350-million-financing-for-social-protection-economic-empowerment-and-digital-transformati" },
+    { title: "Sam Altman - The Intelligence Age", url: "https://ia.samaltman.com/" },
+    { title: "Marc Andreessen - Why AI Will Save the World", url: "https://a16z.com/ai-will-save-the-world/" },
+    { title: "Dario Amodei - Machines of Loving Grace", url: "https://darioamodei.com/essay/machines-of-loving-grace" },
+    { title: "Alex Karp (Palantir) - AI Job Displacement & Humanities (2026)", url: "https://www.businessinsider.com/alex-karp-ai-job-displacement-humanities-democratic-voters-2026-3" },
+    { title: "TechCrunch - Palantir Manifesto on Regressive Cultures (2026)", url: "https://techcrunch.com/2026/04/19/palantir-posts-mini-manifesto-denouncing-regressive-and-harmful-cultures/" },
+    { title: "IDS - Central Database for Lebanese Legislations & Verdicts", url: "https://www.ids.com.lb/news/ids-launches-a-central-online-database-for-the-lebanese-legislations-and-verdicts/" },
+    { title: "Andrej Karpathy - English is the Hottest Programming Language (X/Twitter)", url: "https://x.com/karpathy/status/1617979122625712128?s=20" },
+    { title: "Andrej Karpathy - Programming is Changing / LLM Developers (X/Twitter)", url: "https://x.com/karpathy/status/1886192184808149383?lang=en" },
+    { title: "DataReportal - Digital 2025: Lebanon", url: "https://datareportal.com/reports/digital-2025-lebanon" },
+    { title: "Maharat Foundation - Access to Information Report (2025)", url: "https://maharatfoundation.org/en/AccesstoInformationReport2025" },
+    { title: "Semafor - OpenAI Policy Chief: Access to AI Should be a Right", url: "https://www.semafor.com/article/08/26/2025/openai-head-of-policy-access-to-ai-tools-should-be-a-right" },
+    { title: "IMLebanon - Lebanese Official Gazette News & Archives", url: "https://www.imlebanon.org/newspaper/official-gazette/" },
+    { title: "Palantir Tech - Sovereignty & National Infrastructure (X/Twitter)", url: "https://x.com/PalantirTech/status/2045574398573453312" },
+    { title: "Social Epistemology - AI and Epistemic Agency (Klaus Gartner)", url: "https://social-epistemology.com/2025/11/06/ai-and-epistemic-agency-responding-to-coeckelbergh-klaus-gartner/" },
+    { title: "TechSpot - Nvidia CEO: Children Shouldn't Learn to Code", url: "https://www.techspot.com/news/102020-nvidia-boss-jensen-huang-children-shouldnt-learn-code.html" },
+    { title: "Haigazian University Library - Lebanese Official Gazette Guide", url: "https://www.haigazian.edu.lb/library_list/lebanese-official-gazette-%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%AC%D8%B1%D9%8A%D8%AF%D8%A9-%D8%A7%D9%84%D8%B1%D8%B3%D9%85%D9%8A%D8%A9/" }
+  ];
+
   const thesisDb = thesisData as ThesisDatabase;
   const thesisChapters = [
     { id: 'context', title: 'Chapter 1: Geopolitical, Socio-Economic & Digital Infrastructure Overview', icon: '📁', summary: 'Geopolitical framework, demographic profiles, and network infrastructure of Lebanon' },
@@ -492,9 +513,8 @@ function App() {
                           [ZIP] Download All (Bulk ZIP)/
                         </button>
                       </div>
-                      {thesisMaterialsList.map((item, idx) => {
-                        const isLastItem = idx === thesisMaterialsList.length - 1;
-                        const branch = isLastItem ? '└── ' : '├── ';
+                      {thesisMaterialsList.map((item) => {
+                        const branch = '├── ';
                         return (
                           <div key={item.name} className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
                             <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}{branch}📕 </span>
@@ -521,6 +541,43 @@ function App() {
                             <button className="netscape-download-btn" style={{ marginLeft: '8px', padding: '1px 6px', fontSize: '10px' }} onClick={() => triggerDownloadDialog(item.name, item.size)}>
                               [Save]
                             </button>
+                          </div>
+                        );
+                      })}
+                      <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px' }}>
+                        <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}└── 📁 </span>
+                        <button 
+                          className="gopher-link"
+                          onClick={(e) => toggleDir('materials_web_links', e)}
+                          style={{ fontSize: '13px', marginLeft: '6px', fontWeight: 'bold', color: 'var(--win-blue)' }}
+                        >
+                          [DIR] Web Resources &amp; References/
+                        </button>
+                      </div>
+                      {expandedDirs['materials_web_links'] && thesisExternalLinks.map((link, idx) => {
+                        const isLastLink = idx === thesisExternalLinks.length - 1;
+                        const subBranch = isLastLink ? '└── ' : '├── ';
+                        return (
+                          <div key={idx} className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0', fontSize: '12px', paddingLeft: '24px' }}>
+                            <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}   {subBranch}🔗 </span>
+                            <a 
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="gopher-link"
+                              style={{ 
+                                fontSize: '13px', 
+                                marginLeft: '6px', 
+                                maxWidth: '240px', 
+                                overflow: 'hidden', 
+                                textOverflow: 'ellipsis', 
+                                whiteSpace: 'nowrap',
+                                color: '#0000ee'
+                              }}
+                              title={link.title}
+                            >
+                              [URL] {link.title}
+                            </a>
                           </div>
                         );
                       })}
@@ -2437,6 +2494,58 @@ The scraper having worked, and the files being stored in their respective years 
                             >
                               Save File
                             </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="gopher-materials-section" style={{ background: '#dcdcdc', border: '1px solid #999', padding: '8px', marginTop: '16px' }}>
+                    <h3 style={{ fontSize: '14px', fontWeight: 'bold', borderBottom: '1px solid #333', paddingBottom: '4px', marginBottom: '10px' }}>
+                      🔗 Web Resources &amp; References
+                    </h3>
+                    <div className="gopher-materials-list" style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '10px', background: '#fff', border: '1px inset #999', maxHeight: '420px', overflowY: 'auto' }}>
+                      {thesisExternalLinks.map((item, idx) => (
+                        <div key={idx} className="gopher-material-item" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px', borderBottom: '1px solid #eee' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ fontSize: '20px' }}>🔗</span>
+                            <div className="material-info" style={{ display: 'flex', flexDirection: 'column' }}>
+                              <a 
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="material-name" 
+                                style={{ 
+                                  fontWeight: 'bold', 
+                                  color: '#0000ee', 
+                                  textDecoration: 'underline', 
+                                  fontSize: '12.5px'
+                                }}
+                              >
+                                {item.title}
+                              </a>
+                              <span className="material-size" style={{ fontSize: '11px', color: '#666', wordBreak: 'break-all' }}>URL: {item.url}</span>
+                            </div>
+                          </div>
+                          <div style={{ display: 'flex', gap: '6px' }}>
+                            <a 
+                              href={item.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="win-button"
+                              style={{ 
+                                padding: '3px 8px', 
+                                fontSize: '11px', 
+                                textDecoration: 'none', 
+                                color: '#000', 
+                                display: 'inline-block',
+                                textAlign: 'center',
+                                border: '1px solid #777',
+                                background: '#e1e1e1'
+                              }}
+                            >
+                              Visit Site
+                            </a>
                           </div>
                         </div>
                       ))}
