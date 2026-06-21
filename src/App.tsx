@@ -437,10 +437,14 @@ function App() {
   };
 
   const renderThesisChapters = (indentPrefix: string = '') => {
+const chapters = thesisChapters.filter(ch => ['context', 'criteria', 'manuscript', 'materials'].includes(ch.id));
+    const exhibits = thesisChapters.filter(ch => ['translation', 'gource', 'vibecoder', 'invoices', 'sample_issue'].includes(ch.id));
+
     return (
       <div className="gopher-list" style={{ fontFamily: 'monospace', fontSize: '14px' }}>
-        {thesisChapters.map((chapter, index) => {
-          const isLast = index === thesisChapters.length - 1;
+        {/* CHAPTERS GROUP */}
+        {chapters.map((chapter, index) => {
+          const isLast = index === chapters.length - 1;
           const branchChar = isLast ? '└── ' : '├── ';
           const pipeChar = isLast ? '    ' : '│   ';
           const isExpanded = !!expandedDirs[`thesis_${chapter.id}`];
@@ -583,6 +587,65 @@ function App() {
                       })}
                     </div>
                   )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+        {/* SPACER LINE BETWEEN CHAPTERS AND EXHIBITS */}
+        <div style={{ height: '14px', display: 'flex', alignItems: 'center' }}>
+          {indentPrefix && <span style={{ color: '#666', marginRight: '4px' }}>{indentPrefix}</span>}
+        </div>
+
+        {/* SPECIAL EXHIBITS GROUP */}
+        {exhibits.map((chapter, index) => {
+          const isLast = index === exhibits.length - 1;
+          const branchChar = isLast ? '└── ' : '├── ';
+          const pipeChar = isLast ? '    ' : '│   ';
+          const isExpanded = !!expandedDirs[`thesis_${chapter.id}`];
+          const fullKey = `thesis_${chapter.id}`;
+
+          return (
+            <div key={chapter.id} className="gopher-item-container" style={{ margin: '4px 0' }}>
+              <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{ color: '#666', marginRight: '4px' }}>{indentPrefix}{branchChar}</span>
+                <span 
+                  className="gopher-collapse-toggle" 
+                  onClick={(e) => toggleDir(fullKey, e)}
+                  style={{ cursor: 'pointer', fontWeight: 'bold', color: 'blue', marginRight: '6px', userSelect: 'none' }}
+                >
+                  {isExpanded ? '[-]' : '[+]'}
+                </span>
+                <span className="gopher-icon" style={{ marginRight: '6px' }}>{chapter.icon}</span>
+                <button 
+                  className="gopher-link"
+                  onClick={() => handleGopherNavigate(`gopher://gazette.audit.lab/thesis/${chapter.id}`)}
+                  style={{ fontWeight: 'bold' }}
+                >
+                  {chapter.title}
+                </button>
+              </div>
+
+              {isExpanded && (
+                <div className="gopher-subtree" style={{ paddingLeft: '4px' }}>
+                  {/* Sub-item 1: Navigate option */}
+                  <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0' }}>
+                    <span style={{ color: '#666' }}>{indentPrefix}{pipeChar}├── 📖 </span>
+                    <button 
+                      className="gopher-link"
+                      onClick={() => handleGopherNavigate(`gopher://gazette.audit.lab/thesis/${chapter.id}`)}
+                      style={{ fontSize: '13px', marginLeft: '6px' }}
+                    >
+                      [DOC] View Full Chapter Page
+                    </button>
+                  </div>
+
+                  {/* Sub-item 2: Summary text */}
+                  <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'flex-start', margin: '2px 0', fontSize: '12px', color: '#555' }}>
+                    <span style={{ color: '#666', whiteSpace: 'pre' }}>{indentPrefix}{pipeChar}└── 📝 </span>
+                    <span style={{ marginLeft: '6px' }}>[TXT] Summary: {chapter.summary}</span>
+                  </div>
 
                   {chapter.id === 'translation' && (
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -663,7 +726,6 @@ function App() {
                       </div>
                     </div>
                   )}
-
                 </div>
               )}
             </div>
@@ -672,9 +734,8 @@ function App() {
       </div>
     );
   };
-
-
-  // Navigation tab states: 'timeline' | 'scraper' | 'gemini_chat' | 'failures' | 'autonomy' | 'pipeline' | 'whatsapp_chats'
+  
+    // Navigation tab states: 'timeline' | 'scraper' | 'gemini_chat' | 'failures' | 'autonomy' | 'pipeline' | 'whatsapp_chats'
   const [activeTab, setActiveTab] = useState<'timeline' | 'scraper' | 'gemini_chat' | 'failures' | 'autonomy' | 'pipeline' | 'whatsapp_chats'>('timeline');
   const [activeWhatsappChat, setActiveWhatsappChat] = useState<'uncle' | 'gazette'>('uncle');
   const [whatsappImagePreview, setWhatsappImagePreview] = useState<string | null>(null);
