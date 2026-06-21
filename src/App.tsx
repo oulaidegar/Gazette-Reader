@@ -353,13 +353,13 @@ function App() {
           
           // Trigger actual browser file download
           const isThesisMaterial = thesisMaterialsList.some(m => m.name === name);
-          let fileUrl = `./invoices/${name}`;
+          let fileUrl = `./invoices/${encodeURIComponent(name)}`;
           if (isThesisMaterial) {
-            fileUrl = `./thesis_materials/${name}`;
+            fileUrl = `./thesis_materials/${encodeURIComponent(name)}`;
           } else if (name === 'thesis_materials.zip') {
             fileUrl = `./thesis_materials.zip`;
           } else if (['scraper_convs_db.json', 'official_gazette_2025_manifest.json', 'cohere_402_billing_crash.log'].includes(name)) {
-            fileUrl = `./${name}`;
+            fileUrl = `./${encodeURIComponent(name)}`;
           }
           
           const a = document.createElement('a');
@@ -3012,9 +3012,9 @@ The scraper having worked, and the files being stored in their respective years 
                         const isThesisMaterial = thesisMaterialsList.some(m => m.name === downloadFileState.name);
                         
                         if (invoiceFiles.includes(downloadFileState.name)) {
-                          window.open(`./invoices/${downloadFileState.name}`, '_blank');
+                          window.open(`./invoices/${encodeURIComponent(downloadFileState.name)}`, '_blank');
                         } else if (isThesisMaterial) {
-                          window.open(`./thesis_materials/${downloadFileState.name}`, '_blank');
+                          window.open(`./thesis_materials/${encodeURIComponent(downloadFileState.name)}`, '_blank');
                         } else if (downloadFileState.name === 'thesis_materials.zip') {
                           window.open(`./thesis_materials.zip`, '_blank');
                         } else {
@@ -4678,7 +4678,7 @@ The scraper having worked, and the files being stored in their respective years 
             </div>
             <div style={{ flex: 1, background: '#fff', border: '2px inset var(--win-dark-gray)', position: 'relative' }}>
               <iframe 
-                src={`./thesis_materials/${readingPdfPath}`}
+                src={`./thesis_materials/${encodeURIComponent(readingPdfPath)}`}
                 style={{ width: '100%', height: '100%', border: 'none' }}
                 title={readingPdfName || 'PDF Viewer'}
               />
