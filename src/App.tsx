@@ -1573,6 +1573,20 @@ The scraper having worked, and the files being stored in their respective years 
                     )}
                   </div>
 
+                  {/* Item 0.5: Rebuilt Gazette Link */}
+                  <div className="gopher-item-container" style={{ margin: '4px 0 12px 0' }}>
+                    <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center' }}>
+                      <span className="gopher-icon" style={{ marginRight: '6px' }}>📁</span>
+                      <button 
+                        className="gopher-link"
+                        onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/rebuilt-gazette')}
+                        style={{ fontWeight: 'bold', color: '#b22222' }}
+                      >
+                        ACCESS THE REBUILT GAZETTE LINK HERE!!/
+                      </button>
+                    </div>
+                  </div>
+
                   {/* Item 1: App */}
                   <div className="gopher-item-container" style={{ margin: '4px 0' }}>
                     <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center' }}>
@@ -2900,6 +2914,36 @@ The scraper having worked, and the files being stored in their respective years 
                           </p>
                         </div>
                       </div>
+                    </div>
+
+                    {/* Rebuilt Gazette Callout Box inside Readme Document */}
+                    <div style={{ background: '#fff', padding: '16px', border: '3px solid #b22222', marginTop: '24px', marginBottom: '16px' }}>
+                      <strong style={{ color: '#b22222', fontSize: '15px', display: 'block', marginBottom: '8px', fontFamily: 'monospace' }}>
+                        🔗 ACCESS THE REBUILT GAZETTE LINK HERE!!
+                      </strong>
+                      <div style={{ marginBottom: '12px' }}>
+                        <a 
+                          href="https://lagazette.vercel.app/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="gopher-link"
+                          style={{ 
+                            fontSize: '14px', 
+                            fontWeight: 'bold', 
+                            color: '#b22222', 
+                            textDecoration: 'underline',
+                            border: '1px solid #b22222',
+                            padding: '6px 12px',
+                            display: 'inline-block',
+                            background: '#fff3f3'
+                          }}
+                        >
+                          [URL] ACCESS THE REBUILT GAZETTE LINK HERE!! (https://lagazette.vercel.app/)
+                        </a>
+                      </div>
+                      <p style={{ fontSize: '13px', margin: 0, color: '#333', fontStyle: 'italic', borderTop: '1px dashed #ccc', paddingTop: '8px', textAlign: 'justify' }}>
+                        <strong>Deployment Disclosure:</strong> Hello, whomever is reading this - Apologies for all the time it took to get the Gazette Online. Unfortunately, I had to delete over 40 issues of the Gazette due to the supabase free tier limits - that said it is only temporary so you can paroose the app at your leisure, while a plan is set into motion regarding the actual deployment of a working version. Additionally, considering the last 48h+ of frustration in trying to get the Gazette online and working, I think I have a pt 2 of my thesis. Jokes aside, this was extremely frustating - for a few reasons: the context and dependency of running it on Vercel make the back and forth with Antigravity cumbersome, and spin around in circles, while the solution could have been way, way simpler. Instead we had to push to a new repo, create 2 deployments, one for the backend and one for the frontend. Deploy, redeploy, rereredeploy, delete, import. In any case the error was quite simple, which makes this whole paragraph moderately useless. But it was frustrating. And as such a valid data point.
+                      </p>
                     </div>
 
                     <div style={{ borderTop: '2px dashed #777', paddingTop: '12px', marginTop: '20px', textAlign: 'center', fontSize: '11px', color: '#555' }}>
