@@ -913,6 +913,21 @@ Right to Access Information Law (Undated): The text cites the first paragraph of
       });
     }
 
+    if ('access the rebuilt gazette link here!! lagazette vercel app disclosure apologies supabase limits frustration'.includes(query)) {
+      results.push({
+        category: 'gopher',
+        title: 'Gopher: ACCESS THE REBUILT GAZETTE LINK HERE!!',
+        snippet: 'Direct link to the rebuilt Gazette (https://lagazette.vercel.app/) and deployment disclosure.',
+        action: () => {
+          setScreenState('gopher');
+          setGopherPath('gopher://gazette.audit.lab/rebuilt-gazette');
+          setPathHistory(prev => [...prev, 'gopher://gazette.audit.lab/rebuilt-gazette']);
+          setExpandedDirs(prev => ({ ...prev, 'root_readme': true }));
+          setShowSearchDialog(false);
+        }
+      });
+    }
+
     // 2. Dev Timeline (logsData/cascades)
     cascades.forEach((cascade) => {
       cascade.steps.forEach((step) => {
@@ -1545,8 +1560,14 @@ The scraper having worked, and the files being stored in their respective years 
                           </button>
                         </div>
                         <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'flex-start', margin: '2px 0', fontSize: '12px', color: '#555' }}>
-                          <span style={{ color: '#666' }}>└── 📝 </span>
+                          <span style={{ color: '#666' }}>├── 📝 </span>
                           <span style={{ marginLeft: '6px' }}>[TXT] Context: An explanation of UI/UX choices, late 90s aesthetic, and thesis appendices.</span>
+                        </div>
+                        <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0' }}>
+                          <span style={{ color: '#666' }}>└── 📁 </span>
+                          <button className="gopher-link" onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/rebuilt-gazette')} style={{ fontSize: '13px', marginLeft: '6px', fontWeight: 'bold', color: '#b22222' }}>
+                            [DIR] ACCESS THE REBUILT GAZETTE LINK HERE!!/
+                          </button>
                         </div>
                       </div>
                     )}
@@ -2880,6 +2901,78 @@ The scraper having worked, and the files being stored in their respective years 
                         </div>
                       </div>
                     </div>
+
+                    <div style={{ borderTop: '2px dashed #777', paddingTop: '12px', marginTop: '20px', textAlign: 'center', fontSize: '11px', color: '#555' }}>
+                      Gazette Audit Terminal v1.0.0 · All Rights Reserved
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Rebuilt Gazette Link & Disclosure */}
+              {gopherPath === 'gopher://gazette.audit.lab/rebuilt-gazette' && (
+                <div className="gopher-document-view" style={{ maxWidth: '900px' }}>
+                  <div className="gopher-item-row" style={{ marginBottom: '16px' }}>
+                    <span className="gopher-icon">📁</span>
+                    <button 
+                      className="gopher-link parent-dir"
+                      onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/')}
+                    >
+                      .. (Up to higher level directory)
+                    </button>
+                  </div>
+
+                  <h2 className="gopher-doc-title">ACCESS THE REBUILT GAZETTE LINK HERE!!</h2>
+                  
+                  <div className="gopher-text-content" style={{ 
+                    padding: '24px', 
+                    background: '#f8f9fa', 
+                    border: '2px solid #555', 
+                    boxShadow: 'inset 2px 2px 0 #fff, 3px 3px 0 rgba(0,0,0,0.15)',
+                    lineHeight: '1.6', 
+                    fontFamily: '"Courier New", Courier, monospace', 
+                    fontSize: '14px', 
+                    color: '#000' 
+                  }}>
+                    <div style={{ borderBottom: '2px dashed #777', paddingBottom: '12px', marginBottom: '20px', textAlign: 'center', fontWeight: 'bold' }}>
+                      === ATTENTION OPERATOR: EXTERNAL DEPLOYMENT ===
+                    </div>
+
+                    <div style={{ textAlign: 'center', margin: '24px 0' }}>
+                      <p style={{ marginBottom: '12px', fontSize: '13px', color: '#555' }}>
+                        To access the fully rebuilt online web application of the Lebanese Official Gazette, click the link below:
+                      </p>
+                      <a 
+                        href="https://lagazette.vercel.app/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ 
+                          fontSize: '16px', 
+                          fontWeight: 'bold', 
+                          color: '#fff', 
+                          background: '#b22222', 
+                          border: '2px solid #000', 
+                          padding: '12px 24px',
+                          display: 'inline-block',
+                          textDecoration: 'none',
+                          boxShadow: '2px 2px 0 #555',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        [URL] ACCESS THE REBUILT GAZETTE LINK HERE!!
+                      </a>
+                      <p style={{ marginTop: '10px', fontSize: '11px', color: '#777' }}>
+                        URL: https://lagazette.vercel.app/
+                      </p>
+                    </div>
+
+                    <div style={{ borderBottom: '2px dashed #777', paddingBottom: '12px', marginBottom: '20px', fontWeight: 'bold' }}>
+                      === DEPLOYMENT DISCLOSURE ===
+                    </div>
+
+                    <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6', color: '#000', textAlign: 'justify' }}>
+                      Hello, whomever is reading this - Apologies for all the time it took to get the Gazette Online. Unfortunately, I had to delete over 40 issues of the Gazette due to the supabase free tier limits - that said it is only temporary so you can paroose the app at your leisure, while a plan is set into motion regarding the actual deployment of a working version. Additionally, considering the last 48h+ of frustration in trying to get the Gazette online and working, I think I have a pt 2 of my thesis. Jokes aside, this was extremely frustating - for a few reasons: the context and dependency of running it on Vercel make the back and forth with Antigravity cumbersome, and spin around in circles, while the solution could have been way, way simpler. Instead we had to push to a new repo, create 2 deployments, one for the backend and one for the frontend. Deploy, redeploy, rereredeploy, delete, import. In any case the error was quite simple, which makes this whole paragraph moderately useless. But it was frustrating. And as such a valid data point.
+                    </p>
 
                     <div style={{ borderTop: '2px dashed #777', paddingTop: '12px', marginTop: '20px', textAlign: 'center', fontSize: '11px', color: '#555' }}>
                       Gazette Audit Terminal v1.0.0 · All Rights Reserved
