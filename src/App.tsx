@@ -929,6 +929,21 @@ Right to Access Information Law (Undated): The text cites the first paragraph of
       });
     }
 
+    if ('reworked acknowledges acknowledgements daraj media diana moukalled hala nasreddine guillien torres'.includes(query)) {
+      results.push({
+        category: 'gopher',
+        title: 'Gopher: reworked acknowledges:',
+        snippet: 'Acknowledge page thanking mentors, investigations head, supervisor, family, and peers.',
+        action: () => {
+          setScreenState('gopher');
+          setGopherPath('gopher://gazette.audit.lab/acknowledgements');
+          setPathHistory(prev => [...prev, 'gopher://gazette.audit.lab/acknowledgements']);
+          setExpandedDirs(prev => ({ ...prev, 'root_readme': true }));
+          setShowSearchDialog(false);
+        }
+      });
+    }
+
     // 2. Dev Timeline (logsData/cascades)
     cascades.forEach((cascade) => {
       cascade.steps.forEach((step) => {
@@ -1565,9 +1580,15 @@ The scraper having worked, and the files being stored in their respective years 
                           <span style={{ marginLeft: '6px' }}>[TXT] Context: An explanation of UI/UX choices, late 90s aesthetic, and thesis appendices.</span>
                         </div>
                         <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0' }}>
-                          <span style={{ color: '#666' }}>└── 📁 </span>
+                          <span style={{ color: '#666' }}>├── 📁 </span>
                           <button className="gopher-link" onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/rebuilt-gazette')} style={{ fontSize: '13px', marginLeft: '6px', fontWeight: 'bold', color: '#b22222' }}>
                             [DIR] ACCESS THE REBUILT GAZETTE LINK HERE!!/
+                          </button>
+                        </div>
+                        <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0' }}>
+                          <span style={{ color: '#666' }}>└── 📄 </span>
+                          <button className="gopher-link" onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/acknowledgements')} style={{ fontSize: '13px', marginLeft: '6px', fontWeight: 'bold' }}>
+                            [TXT] reworked acknowledges:
                           </button>
                         </div>
                       </div>
@@ -1584,6 +1605,20 @@ The scraper having worked, and the files being stored in their respective years 
                         style={{ fontWeight: 'bold', color: '#b22222' }}
                       >
                         ACCESS THE REBUILT GAZETTE LINK HERE!!/
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Item 0.75: Reworked Acknowledgements */}
+                  <div className="gopher-item-container" style={{ margin: '4px 0 12px 0' }}>
+                    <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center' }}>
+                      <span className="gopher-icon" style={{ marginRight: '6px' }}>📄</span>
+                      <button 
+                        className="gopher-link"
+                        onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/acknowledgements')}
+                        style={{ fontWeight: 'bold' }}
+                      >
+                        reworked acknowledges:
                       </button>
                     </div>
                   </div>
@@ -3188,6 +3223,90 @@ The scraper having worked, and the files being stored in their respective years 
 
                     <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6', color: '#000', textAlign: 'justify' }}>
                       Hello, whomever is reading this - Apologies for all the time it took to get the Gazette Online. Unfortunately, I had to delete over 40 issues of the Gazette due to the supabase free tier limits - that said it is only temporary so you can paroose the app at your leisure, while a plan is set into motion regarding the actual deployment of a working version. Additionally, considering the last 48h+ of frustration in trying to get the Gazette online and working, I think I have a pt 2 of my thesis. Jokes aside, this was extremely frustating - for a few reasons: the context and dependency of running it on Vercel make the back and forth with Antigravity cumbersome, and spin around in circles, while the solution could have been way, way simpler. Instead we had to push to a new repo, create 2 deployments, one for the backend and one for the frontend. Deploy, redeploy, rereredeploy, delete, import. In any case the error was quite simple, which makes this whole paragraph moderately useless. But it was frustrating. And as such a valid data point.
+                    </p>
+
+                    <div style={{ borderTop: '2px dashed #777', paddingTop: '12px', marginTop: '20px', textAlign: 'center', fontSize: '11px', color: '#555' }}>
+                      Gazette Audit Terminal v1.0.0 · All Rights Reserved
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Reworked Acknowledgements */}
+              {gopherPath === 'gopher://gazette.audit.lab/acknowledgements' && (
+                <div className="gopher-document-view" style={{ maxWidth: '900px' }}>
+                  <div className="gopher-item-row" style={{ marginBottom: '16px' }}>
+                    <span className="gopher-icon">📁</span>
+                    <button 
+                      className="gopher-link parent-dir"
+                      onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/')}
+                    >
+                      .. (Up to higher level directory)
+                    </button>
+                  </div>
+
+                  <h2 className="gopher-doc-title">reworked acknowledges:</h2>
+                  
+                  <div className="gopher-text-content" style={{ 
+                    padding: '24px', 
+                    background: '#f8f9fa', 
+                    border: '2px solid #555', 
+                    boxShadow: 'inset 2px 2px 0 #fff, 3px 3px 0 rgba(0,0,0,0.15)',
+                    lineHeight: '1.6', 
+                    fontFamily: '"Courier New", Courier, monospace', 
+                    fontSize: '14px', 
+                    color: '#000' 
+                  }}>
+                    <div style={{ borderBottom: '2px dashed #777', paddingBottom: '12px', marginBottom: '20px', textAlign: 'center', fontWeight: 'bold' }}>
+                      === ACADEMIC & PERSONAL ACKNOWLEDGEMENTS ===
+                    </div>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px' }}>
+                      I would like to thank first and foremost my mentors who generously took me in as an intern at Daraj Media, and enabled me to explore, build, and learn about the importance of independent media. Thank you, Diana Moukalled, Alia Ibrahim & Hazem el Amin.
+                    </p>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px' }}>
+                      Additionally, I would like to give special thanks to Hala Nasreddine, the head of Investigations at Daraj Media, for introducing me to the Gazette and for unfurling this now over-two-year journey. I would also like to take a moment to acknowledge and thank all of the team I worked with during my time in Lebanon, namely Hiba Monzer, Hayat Salman, and Grace Akhil.
+                    </p>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px' }}>
+                      I would also like to thank my supervisor, Guillen Torres, who has been more than understanding and compassionate in his directives, and without his guidance, I do not believe I would have been able to complete a draft. His enthusiasm for the project did not go unnoticed!
+                    </p>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px' }}>
+                      I would also like to thank my parents, Ayman and Delphine, and my sister Mïa, who have consistently supported me in my various endeavors. If not for my ability to have studied abroad.
+                    </p>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px' }}>
+                      I would like to extend a very special thanks to all the wonderful people I have met in this master's, and along the way, Lukas, Daria, Sofia, Remi, Viola, Collin, Ema, Teun, Tommy, Chris, Gabby, Shakira, Iuri, and Nisa. And who have made this year worthwhile and challenging. Special Dedication to Slughorn’s Hourglass Team.
+                    </p>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px' }}>
+                      Finally, I would like to thank four very special people whom I hold close to my heart.
+                    </p>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px', paddingLeft: '16px', borderLeft: '2px solid #555' }}>
+                      To my uncle Assil, who, despite only appearing in my thesis for a small part, has been perhaps the greatest uncle one could ask for. Ceaselessly by my side, and constantly shoving food down my throat, with a constant dispensing of cigarettes.
+                    </p>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px', paddingLeft: '16px', borderLeft: '2px solid #555' }}>
+                      To Saleh, my natoor, but better yet friend, we are both the same age, and yet our existence could not have been more different.
+                    </p>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px', paddingLeft: '16px', borderLeft: '2px solid #555' }}>
+                      To Enas Abdallah, whom I think about on a daily basis, and even if I don’t pass this Master’s, made my dream of seeing the Pyramids come true, and whose conversation I miss dearly.
+                    </p>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px', paddingLeft: '16px', borderLeft: '2px solid #555' }}>
+                      And finally, to Abeer Mohsen, whose work as a Journalist in Yemen, then Lebanon, and now France, and her continued fight for basic human rights are a daily, quarterly, and yearly inspiration.
+                    </p>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px' }}>
+                      This project began in the office of an independent media company; it was initially built for civil society to enable work rather than disable it. Since October 7th, journalists and media workers have been continuously and effectively targeted by Israel. In Gaza, over 200 have been killed, and in Lebanon, 27 and counting.
+                    </p>
+
+                    <p style={{ whiteSpace: 'pre-wrap', color: '#000', textAlign: 'justify', marginBottom: '16px', fontWeight: 'bold' }}>
+                      The price of truth is a heavy load, often borne by those most vulnerable on the front lines of information. Protecting and empowering the journalists and activists who strive to set the truth free is not just a moral obligation but a paramount necessity for a functioning global society. This pursuit is inextricably linked to the broader fight for national sovereignty and individual dignity. In closing, this thesis is solemnly dedicated to the courageous individuals who have dedicated, and in many cases, sacrificed, their lives to this cause. It honors the memory of those like Ali Shoaib, Issam Abdallah, Amal Khalil and the many others who have been targeted and killed while performing their essential work.
                     </p>
 
                     <div style={{ borderTop: '2px dashed #777', paddingTop: '12px', marginTop: '20px', textAlign: 'center', fontSize: '11px', color: '#555' }}>
