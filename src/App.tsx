@@ -929,11 +929,11 @@ Right to Access Information Law (Undated): The text cites the first paragraph of
       });
     }
 
-    if ('reworked acknowledges acknowledgements daraj media diana moukalled hala nasreddine guillien torres'.includes(query)) {
+    if ('reworked acknowledgements daraj media diana moukalled hala nasreddine guillien torres'.includes(query)) {
       results.push({
         category: 'gopher',
-        title: 'Gopher: reworked acknowledges:',
-        snippet: 'Acknowledge page thanking mentors, investigations head, supervisor, family, and peers.',
+        title: 'Gopher: reworked acknowledgements:',
+        snippet: 'Acknowledgements page thanking mentors, investigations head, supervisor, family, and peers.',
         action: () => {
           setScreenState('gopher');
           setGopherPath('gopher://gazette.audit.lab/acknowledgements');
@@ -1588,7 +1588,7 @@ The scraper having worked, and the files being stored in their respective years 
                         <div className="gopher-item-row" style={{ display: 'flex', alignItems: 'center', margin: '2px 0' }}>
                           <span style={{ color: '#666' }}>└── 📄 </span>
                           <button className="gopher-link" onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/acknowledgements')} style={{ fontSize: '13px', marginLeft: '6px', fontWeight: 'bold' }}>
-                            [TXT] reworked acknowledges:
+                            [TXT] reworked acknowledgements:
                           </button>
                         </div>
                       </div>
@@ -1618,7 +1618,7 @@ The scraper having worked, and the files being stored in their respective years 
                         onClick={() => handleGopherNavigate('gopher://gazette.audit.lab/acknowledgements')}
                         style={{ fontWeight: 'bold' }}
                       >
-                        reworked acknowledges:
+                        reworked acknowledgements:
                       </button>
                     </div>
                   </div>
@@ -3245,7 +3245,7 @@ The scraper having worked, and the files being stored in their respective years 
                     </button>
                   </div>
 
-                  <h2 className="gopher-doc-title">reworked acknowledges:</h2>
+                  <h2 className="gopher-doc-title">reworked acknowledgements:</h2>
                   
                   <div className="gopher-text-content" style={{ 
                     padding: '24px', 
