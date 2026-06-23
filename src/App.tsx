@@ -185,6 +185,7 @@ function App() {
 
   // Thesis visual methodology & scroll navigator states
   const [activePillarIndex, setActivePillarIndex] = useState<number>(0);
+  const [oscillatorBalance, setOscillatorBalance] = useState<'balanced' | 'researcher' | 'vibecoder'>('balanced');
   const [activeBibKey, setActiveBibKey] = useState<string | null>(null);
   const [highlightedSectionId, setHighlightedSectionId] = useState<string | null>(null);
 
@@ -1985,11 +1986,182 @@ The scraper having worked, and the files being stored in their respective years 
                     <span style={{ fontWeight: 'bold', display: 'block', marginBottom: '6px', color: 'var(--win-blue)', textTransform: 'uppercase' }}>
                       📋 Methodological Frame: The Oscillating Method
                     </span>
-                    <strong>Broadly</strong>, the oscillating method is an <strong>autoethnographic, practice-based approach</strong> grounded in Donald Schön’s epistemology of the "reflective practitioner," designed to capture the lived, material experience of building civic infrastructure with AI from the inside.
+                    <strong>To my supervisor:</strong> In order to document and analyze the continuous frictions of building this project, I adopted a practice-based, autoethnographic methodology inspired by Donald Schön’s epistemology of the "reflective practitioner." I call this the <strong>oscillating method</strong>.
                     <br /><br />
-                    <strong>Narrowly</strong>, it functions as a diagnostic tool that leverages your dual identity by requiring you to <strong>constantly shift back and forth between two distinct personas: the applied "vibe-coder"</strong> who executes technical tasks to keep the build moving, <strong>and the "critical researcher"</strong> who pauses to document friction and interrogate what those technical failures reveal about algorithmic biases, structural dependencies, and corporate monopolies.
+                    Rather than separating researcher reflection from technical execution, this approach directly leverages my split identity. Throughout the development lifecycle, I found myself constantly shifting back and forth between two distinct, opposing personas:
                     <br /><br />
-                    By deliberately treating this split identity as an analytical instrument rather than a conflict of interest, the method captures the exact moments when your technical ambitions hit structural or material ceilings, effectively turning your subjective coding frustrations into rigorous, objective data.
+                    1. <strong>The Applied "Vibe-Coder"</strong>: Focused on technical momentum, executing tasks rapidly, and pushing the boundaries of code generation to keep the build moving forward.
+                    <br />
+                    2. <strong>The "Critical Researcher"</strong>: Intentionally pausing to document failure points, inspect dependency loops, and interrogate the economic and structural ceilings of the AI tools.
+                    <br /><br />
+                    By consciously treating this oscillation as an analytical instrument rather than a conflict of interest, I have captured the precise moments where my technical ambitions collided with real-world infrastructure and API limitations. This allows me to present my daily coding struggles not merely as troubleshooting logs, but as primary empirical data auditing the opacity of the agentic system.
+
+                    {/* Interactive Visual Balance Scale */}
+                    <div style={{ 
+                      margin: '16px 0 8px 0', 
+                      padding: '12px', 
+                      background: '#fff', 
+                      border: '1px solid #777', 
+                      textAlign: 'center',
+                      fontFamily: '"Courier New", monospace'
+                    }}>
+                      <div style={{ fontWeight: 'bold', fontSize: '11px', color: '#555', marginBottom: '8px' }}>
+                        ⚖️ INTERACTIVE OSCILLATION BALANCE (Click Endpoints to Shift Weight)
+                      </div>
+                      
+                      {/* Scale Beam */}
+                      <div style={{ 
+                        position: 'relative', 
+                        width: '260px', 
+                        height: '60px', 
+                        margin: '0 auto'
+                      }}>
+                        {/* The Horizontal Beam */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '20px',
+                          left: '20px',
+                          width: '220px',
+                          height: '4px',
+                          background: '#555',
+                          transition: 'transform 0.3s ease',
+                          transformOrigin: '110px 2px',
+                          transform: oscillatorBalance === 'researcher' ? 'rotate(-10deg)' : oscillatorBalance === 'vibecoder' ? 'rotate(10deg)' : 'rotate(0deg)'
+                        }}>
+                          {/* Left Hanger */}
+                          <div style={{
+                            position: 'absolute',
+                            left: '10px',
+                            top: '4px',
+                            width: '2px',
+                            height: '24px',
+                            background: '#777',
+                            transformOrigin: 'top center',
+                            transform: oscillatorBalance === 'researcher' ? 'rotate(10deg)' : oscillatorBalance === 'vibecoder' ? 'rotate(-10deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.3s ease'
+                          }}>
+                            {/* Pan Plate */}
+                            <div 
+                              onClick={() => setOscillatorBalance('researcher')}
+                              style={{
+                                position: 'absolute',
+                                left: '-39px',
+                                top: '24px',
+                                width: '80px',
+                                height: '18px',
+                                background: oscillatorBalance === 'researcher' ? '#1d4ed8' : '#e4e4e7',
+                                border: '1px solid #000',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: oscillatorBalance === 'researcher' ? '#fff' : '#000',
+                                fontSize: '8px',
+                                fontWeight: 'bold',
+                                boxShadow: '1px 1px 0 rgba(0,0,0,0.2)'
+                              }}
+                              title="Click to shift focus to Researcher Persona"
+                            >
+                              RESEARCHER
+                            </div>
+                          </div>
+
+                          {/* Right Hanger */}
+                          <div style={{
+                            position: 'absolute',
+                            right: '10px',
+                            top: '4px',
+                            width: '2px',
+                            height: '24px',
+                            background: '#777',
+                            transformOrigin: 'top center',
+                            transform: oscillatorBalance === 'researcher' ? 'rotate(10deg)' : oscillatorBalance === 'vibecoder' ? 'rotate(-10deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.3s ease'
+                          }}>
+                            {/* Pan Plate */}
+                            <div 
+                              onClick={() => setOscillatorBalance('vibecoder')}
+                              style={{
+                                position: 'absolute',
+                                left: '-39px',
+                                top: '24px',
+                                width: '80px',
+                                height: '18px',
+                                background: oscillatorBalance === 'vibecoder' ? '#b22222' : '#e4e4e7',
+                                border: '1px solid #000',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: oscillatorBalance === 'vibecoder' ? '#fff' : '#000',
+                                fontSize: '8px',
+                                fontWeight: 'bold',
+                                boxShadow: '1px 1px 0 rgba(0,0,0,0.2)'
+                              }}
+                              title="Click to shift focus to Vibe Coder Persona"
+                            >
+                              VIBE CODER
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Stand / Pivot */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '18px',
+                          left: '127px',
+                          width: '6px',
+                          height: '34px',
+                          background: '#333'
+                        }}></div>
+                        <div style={{
+                          position: 'absolute',
+                          top: '52px',
+                          left: '115px',
+                          width: '30px',
+                          height: '6px',
+                          background: '#333',
+                          borderRadius: '2px'
+                        }}></div>
+                      </div>
+
+                      {/* Mode description text */}
+                      <div style={{ marginTop: '22px', minHeight: '38px', fontSize: '11.5px', padding: '6px', background: '#f8f9fa', border: '1px dotted #ccc', lineHeight: '1.4' }}>
+                        {oscillatorBalance === 'balanced' && (
+                          <span>
+                            ⚖️ <strong>Balanced State</strong>: Clicking the pans above shifts the methodological focus. Currently, both personas are in tension, maintaining a state of active reflection-in-action.
+                          </span>
+                        )}
+                        {oscillatorBalance === 'researcher' && (
+                          <span style={{ color: '#1d4ed8' }}>
+                            🔍 <strong>Researcher Mode</strong>: Pausing execution to analyze and document system opacity, Cohere 402 bill walls, and Git transfer constraints.
+                          </span>
+                        )}
+                        {oscillatorBalance === 'vibecoder' && (
+                          <span style={{ color: '#b22222' }}>
+                            ⚡ <strong>Vibe Coder Mode</strong>: Pushing rapid updates, blindly accepting code-diffs, and optimizing the workspace at speed.
+                          </span>
+                        )}
+                        
+                        {/* Reset Button */}
+                        {oscillatorBalance !== 'balanced' && (
+                          <button 
+                            onClick={() => setOscillatorBalance('balanced')}
+                            style={{
+                              marginLeft: '8px',
+                              fontSize: '9px',
+                              padding: '1px 4px',
+                              cursor: 'pointer',
+                              background: '#fff',
+                              border: '1px solid #777',
+                              fontFamily: 'inherit'
+                            }}
+                          >
+                            [Reset]
+                          </button>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   {/* Greek Pillar Chamber */}
